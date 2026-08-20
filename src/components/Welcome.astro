@@ -6,13 +6,13 @@ const t = useTranslations(lang);
 ---
 
 <section
-	class="container-fluid d-flex justify-content-center text-center text-white bg-dark"
+	class="container-fluid d-flex justify-content-center text-center text-white hero-bg"
 	id="inicio"
 	style="height: 100vh;"
 >
 	<div class="contenedor">
 		<div>
-			<img class="foto" src="/images/sammy.png" />
+			<img class="foto" src="/images/sammy.png" alt="Sammy Odeh" />
 		</div>
 		<div class="info-btn-container">
 			<div class="section-info">
@@ -62,49 +62,43 @@ const t = useTranslations(lang);
 	<div class="sobre-mi-seccion">
 		<div class="sobre-mi-titulos">
 			<h5>{t("about.aprende")}</h5>
-			<h2 class="text-black">{t("about.aboutMe")}</h2>
+			<h2 class="section-title text-black">{t("about.aboutMe")}</h2>
 		</div>
 		<div class="sobre-mi-contenedor">
-			<div class="sobre-mi-imagen-texto">
-				<img class="foto" src="/images/sammyteclado.png" />
-				<p>
-					{t("about.parrafo")}
-				</p>
+			<div class="sobre-mi-foto">
+				<img src="/images/sammyteclado.png" alt="Sammy Odeh" />
 			</div>
-			<div class="contenedor-sobre-mi-datos">
-				<div class="sobre-mi-datos">
-					<video
-						autoplay
-						loop
-						muted
-						playsinline
-						class="background-video"
-					>
-						<source src="/videos/bgvideo.mp4" type="video/mp4" />
-						Tu navegador no soporta videos.
-					</video>
-					<span class="material-symbols-outlined">
-						military_tech
-					</span>
-					<h6>{t("about.exp")}</h6>
-					<p>1+ {t("about.años")}</p>
-					<p>{t("about.rol")}</p>
-				</div>
-				<div class="sobre-mi-datos">
-					<video
-						autoplay
-						loop
-						muted
-						playsinline
-						class="background-video"
-					>
-						<source src="/videos/bgvideo.mp4" type="video/mp4" />
-						Tu navegador no soporta videos.
-					</video>
-					<span class="material-symbols-outlined"> school </span>
-					<h6>{t("about.educacion")}</h6>
-					<p>{t("about.bachiller")}</p>
-					<p>{t("about.daw")}</p>
+			<div class="sobre-mi-contenido">
+				<p class="sobre-mi-parrafo">{t("about.parrafo")}</p>
+				<div class="sobre-mi-highlights">
+					<div class="highlight">
+						<span class="material-symbols-outlined">military_tech</span>
+						<div>
+							<h6>1+ {t("about.años")}</h6>
+							<p>{t("about.rol")}</p>
+						</div>
+					</div>
+					<div class="highlight">
+						<span class="material-symbols-outlined">school</span>
+						<div>
+							<h6>{t("about.daw")}</h6>
+							<p>{t("about.fp")}</p>
+						</div>
+					</div>
+					<div class="highlight">
+						<span class="material-symbols-outlined">security</span>
+						<div>
+							<h6>{t("about.masterCyber")}</h6>
+							<p>{t("about.especializacion")}</p>
+						</div>
+					</div>
+					<div class="highlight">
+						<span class="material-symbols-outlined">location_on</span>
+						<div>
+							<h6>{t("about.ubicacion")}</h6>
+							<p>{t("about.disponibilidad")}</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -113,108 +107,143 @@ const t = useTranslations(lang);
 <section
 	id="proyectos"
 	class="proyectos container-fluid d-flex justify-content-center text-center"
-	style="height: 100vh; background: linear-gradient(to bottom, #e0dfdf, white);"
-	;
+	style="min-height: 100vh; background: linear-gradient(to bottom, #e0dfdf, white);"
 >
 	<div class="proyectos-seccion">
 		<div class="proyectos-titulos">
-			<h2 class="text-black">{t("projects.proyectos")}</h2>
+			<h2 class="section-title text-black">{t("projects.proyectos")}</h2>
 		</div>
-		<div class="proyectos-contenedor">
-			<div class="proyecto">
+		<div class="proyectos-grid">
+			<div class="proyecto-card">
 				<a
+					class="proyecto-imagen-link"
 					href="https://padelges-production.up.railway.app/"
 					target="_blank"
 					rel="noopener noreferrer"
 				>
-					<h3>Padel Ges</h3>
-					<img class="proyectos-img" src="/images/padelGes.png" />
+					<img
+						class="proyecto-imagen"
+						src="/images/padelGes.png"
+						alt="Padel Ges"
+					/>
+					<span class="proyecto-overlay">{t("projects.verProyecto")} ↗</span>
 				</a>
-				<p>
-					{t("projects.parrafo1")}
-				</p>
-				<div class="proyecto-skills">
-					<img src="/images/laravel.png" />
+				<div class="proyecto-info">
+					<h3>Padel Ges</h3>
+					<p>{t("projects.parrafo1")}</p>
+					<div class="proyecto-tags">
+						<span class="tech-tag">Laravel</span>
+						<span class="tech-tag">PHP</span>
+						<span class="tech-tag">MySQL</span>
+					</div>
+				</div>
+			</div>
+			<div class="proyecto-card">
+				<a
+					class="proyecto-imagen-link"
+					href="https://utilidadesonline.es"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<img
+						class="proyecto-imagen"
+						src="/images/utilidadesOnline.png"
+						alt="Utilidades Online"
+					/>
+					<span class="proyecto-overlay">{t("projects.verProyecto")} ↗</span>
+				</a>
+				<div class="proyecto-info">
+					<h3>Utilidades Online</h3>
+					<p>{t("projects.parrafo2")}</p>
+					<div class="proyecto-tags">
+						<span class="tech-tag">Astro</span>
+						<span class="tech-tag">TypeScript</span>
+						<span class="tech-tag">Tailwind CSS</span>
+						<span class="tech-tag">Cloudflare</span>
+					</div>
 				</div>
 			</div>
 		</div>
 		<h5 class="mt-5">{t("projects.habilidades")}</h5>
 		<div class="skills">
-			<img src="/images/html-5.png" />
-			<img src="/images/css-3.png" />
-			<img src="/images/js.png" />
-			<img src="/images/bootstrap.png" />
-			<img src="/images/php.png" />
-			<img src="/images/mysql.png" />
-			<img src="/images/java.png" />
+			<span class="skill-pill">HTML5</span>
+			<span class="skill-pill">CSS3</span>
+			<span class="skill-pill">JavaScript</span>
+			<span class="skill-pill">TypeScript</span>
+			<span class="skill-pill">Astro</span>
+			<span class="skill-pill">Laravel</span>
+			<span class="skill-pill">PHP</span>
+			<span class="skill-pill">MySQL</span>
+			<span class="skill-pill">Tailwind CSS</span>
+			<span class="skill-pill">Bootstrap</span>
+			<span class="skill-pill">Java</span>
 		</div>
 	</div>
 </section>
 <section
 	id="contacto"
 	class="contacto container-fluid d-flex justify-content-center text-center"
-	style="height: 100vh; background: linear-gradient(to bottom, white, #e0dfdf);"
-	;
+	style="min-height: 100vh; background: linear-gradient(to bottom, white, #e0dfdf);"
 >
 	<div class="contacto-seccion">
 		<div class="contacto-titulos">
-			<h2 class="text-black">{t("contacto.contacta")}</h2>
+			<h2 class="section-title text-black">{t("contacto.contacta")}</h2>
 			<h5>
 				{t("contacto.hablo")}
 				<img src="/images/spain.png" alt="España" width="24px" />
 				<img src="/images/united-kingdom.png" alt="uk" width="24px" />
 			</h5>
 		</div>
-		<div class="contacto-redes">
+		<div class="contacto-grid">
+			<a class="contacto-card" href="mailto:sam_po13@hotmail.com">
+				<i class="fa-solid fa-envelope"></i>
+				<div>
+					<h6>{t("contacto.correo")}</h6>
+					<p>sam_po13@hotmail.com</p>
+				</div>
+			</a>
 			<a
+				class="contacto-card"
+				href="https://wa.me/34636731525"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				<i class="fa-brands fa-whatsapp"></i>
+				<div>
+					<h6>WhatsApp</h6>
+					<p>+34 636 731 525</p>
+				</div>
+			</a>
+			<a
+				class="contacto-card"
+				href="https://www.linkedin.com/in/sammyodeh"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				<i class="fa-brands fa-linkedin"></i>
+				<div>
+					<h6>LinkedIn</h6>
+					<p>{t("contacto.linkedin")}</p>
+				</div>
+			</a>
+			<a
+				class="contacto-card"
 				href="https://www.instagram.com/sr.samodeh"
 				target="_blank"
 				rel="noopener noreferrer"
 			>
 				<i class="fa-brands fa-instagram"></i>
-				{t("contacto.insta")}
-			</a>
-
-			<a
-				href="https://www.linkedin.com/in/sammyodeh"
-				target="_blank"
-				rel="noopener noreferrer"
-			>
-				<i class="fa-brands fa-linkedin"></i>{t("contacto.linkedin")}
-			</a>
-		</div>
-		<div class="contacto-mail">
-			<h5>{t("contacto.correo")}</h5>
-			<form
-				action="mailto:sam_po13@hotmail.com"
-				method="POST"
-				enctype="text/plain"
-			>
-				<div class="contacto-mail-contenedor">
-					<div class="contacto-input-contenedor">
-						<div class="flex">
-							<label for="nombre">{t("contacto.tuNombre")}</label>
-							<input type="text" name="nombre" required />
-						</div>
-						<div class="flex">
-							<label for="correo">{t("contacto.tuCorreo")}</label>
-							<input type="email" name="correo" required />
-						</div>
-					</div>
-					<div class="flex">
-						<label for="mensaje">{t("contacto.tuMensaje")}</label>
-						<textarea name="mensaje" required></textarea>
-					</div>
+				<div>
+					<h6>Instagram</h6>
+					<p>{t("contacto.insta")}</p>
 				</div>
-				<button type="submit">{t("contacto.enviar")}</button>
-			</form>
+			</a>
 		</div>
 	</div>
 </section>
 
 <style>
-	@import url("https://fonts.googleapis.com/css2?family=Changa:wght@200..800&display=swap");
-	@import url("https://fonts.googleapis.com/css2?family=Wendy+One&display=swap");
+	@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400..700&family=Inter:wght@400;500;600;700&display=swap");
 
 	.material-symbols-outlined {
 		color: black;
@@ -222,7 +251,15 @@ const t = useTranslations(lang);
 	}
 
 	body {
-		font-family: "Wendy One", serif;
+		font-family: "Inter", sans-serif;
+	}
+
+	h1,
+	h2,
+	h3,
+	h5,
+	h6 {
+		font-family: "Space Grotesk", sans-serif;
 	}
 
 	a {
@@ -230,7 +267,43 @@ const t = useTranslations(lang);
 		color: inherit;
 	}
 
+	.hero-bg {
+		position: relative;
+		overflow: hidden;
+		background: linear-gradient(160deg, #0d1117 0%, #000000 100%);
+	}
+
+	.hero-bg::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background-image: radial-gradient(
+			rgba(255, 255, 255, 0.08) 1px,
+			transparent 1px
+		);
+		background-size: 26px 26px;
+		pointer-events: none;
+	}
+
+	.hero-bg::after {
+		content: "";
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 700px;
+		height: 700px;
+		transform: translate(-50%, -50%);
+		background: radial-gradient(
+			circle,
+			rgba(26, 188, 156, 0.25),
+			transparent 70%
+		);
+		pointer-events: none;
+	}
+
 	.contenedor {
+		position: relative;
+		z-index: 1;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -292,10 +365,6 @@ const t = useTranslations(lang);
 
 	.section-info * {
 		margin-top: 10px;
-	}
-
-	.section-info h5 {
-		font-family: "Changa", serif;
 	}
 
 	.section-info-parrafo {
@@ -400,122 +469,196 @@ const t = useTranslations(lang);
 		margin-top: 50px;
 	}
 
-	.sobre-mi-titulos h2 {
-		font-size: 40px;
+	.section-title {
+		font-size: 28px;
 	}
 
 	.sobre-mi-titulos h5 {
 		color: #757272;
-		font-family: "Changa", serif;
 	}
 
-	.sobre-mi-imagen-texto {
+	.sobre-mi-contenedor {
 		display: flex;
-		font-size: 12px;
-		color: #757272;
+		flex-direction: column;
 		align-items: center;
-		justify-content: center;
-		flex-direction: column;
-		gap: 10px;
+		gap: 30px;
+		margin-top: 40px;
 	}
 
-	.sobre-mi-imagen-texto img {
-		width: 150px;
+	.sobre-mi-foto {
+		position: relative;
+		width: 220px;
 	}
 
-	.contenedor-sobre-mi-datos {
+	.sobre-mi-foto::before {
+		content: "";
+		position: absolute;
+		inset: 14px -14px -14px 14px;
+		background: #1abc9c;
+		border-radius: 20px;
+		z-index: 0;
+	}
+
+	.sobre-mi-foto img {
+		position: relative;
+		z-index: 1;
+		display: block;
+		width: 100%;
+		aspect-ratio: 4 / 5;
+		object-fit: cover;
+		border-radius: 20px;
+		box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+	}
+
+	.sobre-mi-contenido {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
-		gap: 20px;
+		gap: 25px;
+		max-width: 520px;
+		text-align: left;
 	}
 
-	.sobre-mi-datos {
-		position: relative;
-		overflow: hidden;
-		padding: 30px;
-		border-radius: 20px;
-		background: rgba(0, 0, 0, 0.75);
-		backdrop-filter: blur(10px);
-		color: white;
-		transition: transform 0.3s ease;
+	.sobre-mi-parrafo {
+		color: #555;
+		font-size: 15px;
+		line-height: 1.7;
+		text-align: justify;
 	}
 
-	.sobre-mi-datos:hover {
-		transform: translateY(-8px);
+	.sobre-mi-highlights {
+		display: flex;
+		flex-direction: column;
+		gap: 18px;
 	}
 
-	.background-video {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		object-fit: cover; /* Asegura que el video cubra todo el espacio */
+	.highlight {
+		display: flex;
+		align-items: center;
+		gap: 14px;
 	}
 
-	.sobre-mi-datos span,
-	.sobre-mi-datos h6,
-	.sobre-mi-datos p {
-		position: relative;
-		z-index: 1; /* Asegura que el texto esté sobre el video */
-		color: white; /* Ajusta según el fondo del video */
-		text-align: center;
-		text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Mejora la legibilidad */
+	.highlight .material-symbols-outlined {
+		color: #1abc9c;
+		font-size: 26px;
+		flex-shrink: 0;
 	}
 
-	.sobre-mi-datos span {
-		margin-top: 10px;
+	.highlight h6 {
+		margin: 0;
+		color: black;
+		font-size: 15px;
 	}
 
-	.sobre-mi-datos h6 {
-		margin-bottom: 15px;
-	}
-
-	.sobre-mi-datos p {
+	.highlight p {
+		margin: 0;
 		color: #757272;
-		font-size: 14px;
-	}
-
-	.sobre-mi-datos p:last-of-type {
-		margin-top: -15px;
+		font-size: 13px;
 	}
 
 	.proyectos-seccion {
 		display: flex;
 		flex-direction: column;
+		align-items: center;
+		width: 90%;
+		max-width: 1000px;
+		margin: 0 auto;
 	}
 
 	.proyectos-titulos {
 		margin-top: 100px;
 	}
 
-	.proyectos-titulos h2 {
-		font-size: 40px;
+	.proyectos-grid {
+		margin-top: 30px;
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 30px;
+		width: 100%;
 	}
 
-	.proyectos-contenedor {
-		margin-top: 20px;
-		border: 2px solid #757272;
-		border-radius: 25px;
-		padding: 10px;
+	.proyecto-card {
+		display: flex;
+		flex-direction: column;
+		text-align: left;
+		background: white;
+		border-radius: 16px;
+		overflow: hidden;
+		border: 1px solid rgba(0, 0, 0, 0.08);
+		box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.06);
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
 	}
 
-	.proyectos-img {
-		width: 200px;
+	.proyecto-card:hover {
+		transform: translateY(-6px);
+		box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.12);
 	}
 
-	.proyecto h3 {
-		margin-top: 20px;
-		font-family: "Changa", serif;
+	.proyecto-imagen-link {
+		position: relative;
+		display: block;
+		aspect-ratio: 16 / 10;
+		overflow: hidden;
 	}
 
-	.proyecto p {
+	.proyecto-imagen {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.4s ease;
+	}
+
+	.proyecto-card:hover .proyecto-imagen {
+		transform: scale(1.05);
+	}
+
+	.proyecto-overlay {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: rgba(0, 0, 0, 0.55);
+		color: white;
+		font-weight: bold;
+		text-transform: uppercase;
+		font-size: 14px;
+		letter-spacing: 0.5px;
+		opacity: 0;
+		transition: opacity 0.3s ease;
+	}
+
+	.proyecto-card:hover .proyecto-overlay {
+		opacity: 1;
+	}
+
+	.proyecto-info {
+		padding: 20px;
+	}
+
+	.proyecto-info h3 {
+		color: black;
+	}
+
+	.proyecto-info p {
+		margin-top: 10px;
 		color: #757272;
+		font-size: 14px;
 	}
 
-	.proyecto-skills img {
-		width: 100px;
+	.proyecto-tags {
+		margin-top: 15px;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+
+	.tech-tag {
+		background: rgba(26, 188, 156, 0.12);
+		color: #16a085;
+		font-size: 12px;
+		font-weight: bold;
+		padding: 4px 10px;
+		border-radius: 20px;
 	}
 
 	.skills {
@@ -526,12 +669,29 @@ const t = useTranslations(lang);
 		justify-content: center;
 	}
 
-	.skills img {
-		width: 50px;
-		margin: 0 10px;
+	.skill-pill {
+		background: white;
+		border: 1px solid rgba(0, 0, 0, 0.08);
+		color: #333;
+		font-size: 14px;
+		font-weight: 600;
+		padding: 8px 18px;
+		border-radius: 20px;
+		box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
+		transition: transform 0.25s ease, border-color 0.25s ease,
+			color 0.25s ease;
+	}
+
+	.skill-pill:hover {
+		transform: translateY(-3px);
+		border-color: #1abc9c;
+		color: #16a085;
 	}
 
 	.contacto-seccion {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 		width: 90%;
 	}
 
@@ -539,63 +699,57 @@ const t = useTranslations(lang);
 		margin-top: 100px;
 	}
 
-	.contacto-titulos h2 {
-		font-size: 30px;
-	}
-
 	.contacto-titulos h5 {
 		color: #757272;
 	}
 
-	.contacto-redes {
-		display: flex;
-		flex-direction: column;
-		margin-top: 50px;
-		align-items: flex-start;
-		gap: 10px;
+	.contacto-grid {
+		margin-top: 40px;
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 16px;
+		width: 100%;
+		max-width: 480px;
 	}
 
-	.contacto-redes a {
-		margin-left: 10px;
+	.contacto-card {
 		display: flex;
 		align-items: center;
-	}
-	.contacto-redes i {
-		margin-right: 10px;
-		font-size: 30px;
-	}
-
-	.contacto-mail {
-		margin-top: 50px;
-		gap: 10px;
-		display: flex;
-		flex-direction: column;
-		text-align: justify;
+		gap: 16px;
+		padding: 18px 20px;
+		background: white;
+		border: 1px solid rgba(0, 0, 0, 0.08);
+		border-radius: 14px;
+		box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+		text-align: left;
+		transition: transform 0.3s ease, box-shadow 0.3s ease,
+			border-color 0.3s ease;
 	}
 
-	.flex {
-		display: flex;
-		flex-direction: column;
-		align-items: start;
-		width: 100%;
+	.contacto-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+		border-color: #1abc9c;
 	}
 
-	.contacto-mail-contenedor {
-		display: flex;
-		flex-direction: column;
-		gap: 10px;
+	.contacto-card i {
+		font-size: 26px;
+		color: #1abc9c;
+		flex-shrink: 0;
+		width: 30px;
+		text-align: center;
 	}
 
-	.contacto-input-contenedor {
-		display: flex;
-		flex-direction: column;
-		gap: 10px;
+	.contacto-card h6 {
+		margin: 0;
+		color: black;
+		font-size: 15px;
 	}
 
-	.contacto-mail input,
-	.contacto-mail textarea {
-		width: 100%;
-		line-height: inherit;
+	.contacto-card p {
+		margin: 0;
+		color: #757272;
+		font-size: 13px;
 	}
 
 	button {
@@ -668,64 +822,35 @@ const t = useTranslations(lang);
 		}
 
 		.sobre-mi-contenedor {
-			display: flex;
+			flex-direction: row;
 			align-items: center;
-			justify-content: space-between;
-			gap: 60px;
-			flex-wrap: wrap;
-			margin-top: 40px;
-		}
-
-		.sobre-mi-imagen-texto {
-			flex-direction: row;
-			justify-content: space-around;
-		}
-
-		.sobre-mi-imagen-texto p {
-			width: 100%;
-			font-size: 18px;
-		}
-
-		.sobre-mi-imagen-texto img {
-			width: 250px;
-		}
-
-		.sobre-mi-datos {
-			width: 45%;
-		}
-
-		.contenedor-sobre-mi-datos {
-			display: flex;
-			flex-direction: row;
 			justify-content: center;
-			gap: 20px;
+			gap: 70px;
+			margin-top: 60px;
 		}
 
-		.contacto-redes {
-			margin-top: 100px;
+		.sobre-mi-foto {
+			width: 280px;
+			flex-shrink: 0;
 		}
 
-		.contacto-redes a {
-			margin-left: 10px;
-			display: flex;
-			align-items: center;
-			font-size: 30px;
-			margin-top: 20px;
-		}
-		.contacto-redes i {
-			margin-right: 10px;
-			font-size: 50px;
+		.sobre-mi-highlights {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 24px 30px;
 		}
 
-		.contacto-mail-contenedor {
-			flex-direction: row;
-			gap: 50px;
+		.proyectos-grid {
+			grid-template-columns: repeat(2, 1fr);
 		}
 
-		.contacto-input-contenedor {
-			display: flex;
-			flex-direction: column;
-			width: 50%;
+		.section-title {
+			font-size: 36px;
+		}
+
+		.contacto-grid {
+			grid-template-columns: repeat(2, 1fr);
+			max-width: 700px;
 		}
 	}
 
@@ -745,7 +870,6 @@ const t = useTranslations(lang);
 
 		.section-info h1 {
 			font-size: 50px;
-			color: white;
 		}
 
 		.foto {
@@ -756,69 +880,36 @@ const t = useTranslations(lang);
 			color: #1abc9c;
 		}
 
-		.sobre-mi-datos {
-			border: 2px solid #757272;
-			border-radius: 30px;
-			margin-top: 20px;
-			color: black;
-			width: 90%;
-			max-width: 350px;
+		.sobre-mi-foto {
+			width: 340px;
 		}
 
-		.sobre-mi-imagen-texto p {
-			margin-top: 20px;
+		.sobre-mi-contenido {
+			max-width: 650px;
 		}
 
-		.sobre-mi-imagen-texto img {
-			margin-top: 20px;
+		.sobre-mi-parrafo {
+			font-size: 16px;
 		}
 
-		.sobre-mi-datos span {
-			font-size: 50px;
+		.highlight .material-symbols-outlined {
+			font-size: 32px;
 		}
 
-		.sobre-mi-datos h6 {
-			font-size: 30px;
+		.highlight h6 {
+			font-size: 17px;
 		}
 
-		.sobre-mi-datos p {
-			font-size: 20px;
-		}
-		.sobre-mi-contenedor {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			gap: 25px;
+		.highlight p {
+			font-size: 14px;
 		}
 
 		.contacto-seccion {
 			width: 80%;
 		}
-		.contacto-titulos h2 {
-			font-size: 60px;
-		}
 
-		.contacto-mail {
-			margin-top: 150px;
-		}
-
-		.contacto-mail-contenedor {
-			flex-direction: row;
-			gap: 50px;
-		}
-
-		.contacto-input-contenedor {
-			display: flex;
-			flex-direction: column; /* Mantiene los inputs en columna */
-			width: 50%; /* Hace que los inputs ocupen la mitad del ancho */
-		}
-
-		textarea {
-			height: 96px;
-		}
-
-		button {
-			width: 10%;
+		.section-title {
+			font-size: 48px;
 		}
 	}
 </style>
