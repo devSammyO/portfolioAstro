@@ -44,7 +44,7 @@ const t = useTranslations(lang);
 				<i class="fa-brands fa-linkedin"></i>
 			</a>
 			<a
-				href="https://www.github.com/devRavanelli"
+				href="https://github.com/devSammyO"
 				target="_blank"
 				rel="noopener noreferrer"
 			>
@@ -57,7 +57,7 @@ const t = useTranslations(lang);
 <section
 	class="container-fluid d-flex justify-content-center text-center text-white"
 	id="sobre-mi"
-	style="height: 100vh; background: linear-gradient(to bottom, white, #e0dfdf);"
+	style="height: auto; background: linear-gradient(to bottom, white, #e0dfdf);"
 >
 	<div class="sobre-mi-seccion">
 		<div class="sobre-mi-titulos">
@@ -88,7 +88,7 @@ const t = useTranslations(lang);
 					</span>
 					<h6>{t("about.exp")}</h6>
 					<p>1+ {t("about.años")}</p>
-					<p>{t("info.webDev")}</p>
+					<p>{t("about.rol")}</p>
 				</div>
 				<div class="sobre-mi-datos">
 					<video
@@ -225,8 +225,19 @@ const t = useTranslations(lang);
 		font-family: "Wendy One", serif;
 	}
 
+	a {
+		text-decoration: none;
+		color: inherit;
+	}
+
 	.contenedor {
-		margin-top: 25%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 30px;
+		margin-top: 0;
+		text-align: center;
 	}
 
 	.foto {
@@ -301,7 +312,8 @@ const t = useTranslations(lang);
 	/* Estilos generales de los botones */
 	.btn-contacto,
 	.btn-cv {
-		padding: 10px 70px; /* Tamaño uniforme */
+		padding: 12px 24px;
+		min-width: 180px;
 		font-size: 16px;
 		font-weight: bold;
 		border-radius: 5px;
@@ -316,7 +328,21 @@ const t = useTranslations(lang);
 	.btn-contacto {
 		background-color: #1abc9c;
 		color: black;
-		border: none;
+		border: 2px solid #1abc9c;
+		transition: all 0.3s ease-in-out;
+	}
+
+	.btn-contacto:focus,
+	.btn-cv:focus {
+		outline: 2px solid #1abc9c;
+		outline-offset: 3px;
+	}
+
+	.btn-contacto:hover {
+		background-color: transparent;
+		color: #1abc9c;
+		transform: translateY(-2px);
+		box-shadow: 0 0 12px rgba(26, 188, 156, 0.4);
 	}
 
 	/* Botón Descargar CV */
@@ -327,11 +353,11 @@ const t = useTranslations(lang);
 	}
 
 	/* Hover Estandarizado */
-	.btn-contacto:hover,
 	.btn-cv:hover {
 		background-color: #16a085;
 		color: black;
-		transform: scale(1.05);
+		transform: translateY(-2px);
+		box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.15);
 	}
 
 	/* Efecto al hacer clic */
@@ -341,20 +367,33 @@ const t = useTranslations(lang);
 	}
 
 	.iconos {
+		position: fixed;
+		right: 25px;
+		top: 50%;
+		transform: translateY(-50%);
 		display: flex;
-		gap: 15px;
-		justify-content: center;
-		margin-top: 50px;
+		flex-direction: column;
+		gap: 20px;
 		font-size: 30px;
+		z-index: 1000;
 	}
 
-	a {
-		text-decoration: none;
-		color: inherit;
+	.iconos a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 44px;
+		height: 44px;
+		border-radius: 50%;
+		background: rgba(0, 0, 0, 0.6);
+		color: white;
+		font-size: 20px;
+		transition: all 0.3s ease;
 	}
 
 	.iconos a:hover {
 		color: #1abc9c;
+		transform: scale(1.15);
 	}
 
 	.sobre-mi-titulos {
@@ -384,18 +423,26 @@ const t = useTranslations(lang);
 		width: 150px;
 	}
 
-	.sobre-mi-datos {
-		position: relative; /* Para que el video se posicione dentro */
-		overflow: hidden; /* Evita que el video sobresalga */
-		border: 2px solid #757272;
-		border-radius: 30px;
-		margin-top: 20px;
-		padding: 30px; /* Ajusta el padding para no ocultar el contenido */
-		color: black;
+	.contenedor-sobre-mi-datos {
 		display: flex;
 		flex-direction: column;
-		align-items: center;
 		justify-content: center;
+		gap: 20px;
+	}
+
+	.sobre-mi-datos {
+		position: relative;
+		overflow: hidden;
+		padding: 30px;
+		border-radius: 20px;
+		background: rgba(0, 0, 0, 0.75);
+		backdrop-filter: blur(10px);
+		color: white;
+		transition: transform 0.3s ease;
+	}
+
+	.sobre-mi-datos:hover {
+		transform: translateY(-8px);
 	}
 
 	.background-video {
@@ -484,6 +531,10 @@ const t = useTranslations(lang);
 		margin: 0 10px;
 	}
 
+	.contacto-seccion {
+		width: 90%;
+	}
+
 	.contacto-titulos {
 		margin-top: 100px;
 	}
@@ -519,6 +570,7 @@ const t = useTranslations(lang);
 		gap: 10px;
 		display: flex;
 		flex-direction: column;
+		text-align: justify;
 	}
 
 	.flex {
@@ -563,11 +615,11 @@ const t = useTranslations(lang);
 
 	@media screen and (min-width: 988px) {
 		.contenedor {
-			display: flex;
-			flex-direction: row-reverse; /* Invierte el orden: imagen a la derecha, texto a la izquierda */
+			flex-direction: row-reverse;
+			align-items: center;
 			justify-content: center;
-			margin-top: 15%;
-			gap: 100px;
+			gap: clamp(40px, 6vw, 100px);
+			min-height: 80vh;
 		}
 		.section-info {
 			text-align: justify;
@@ -599,13 +651,11 @@ const t = useTranslations(lang);
 		}
 
 		.iconos {
-			position: absolute;
-			left: 20px; /* Ajusta según necesidad */
-			top: 70%;
-			transform: translateY(-50%);
-			display: flex;
-			flex-direction: column;
-			gap: 20px;
+			left: 30px;
+			bottom: 30px;
+			right: auto;
+			top: auto;
+			transform: none;
 			font-size: 30px;
 		}
 
@@ -619,12 +669,20 @@ const t = useTranslations(lang);
 
 		.sobre-mi-contenedor {
 			display: flex;
-			margin-top: 20px;
-			flex-direction: column;
+			align-items: center;
+			justify-content: space-between;
+			gap: 60px;
+			flex-wrap: wrap;
+			margin-top: 40px;
+		}
+
+		.sobre-mi-imagen-texto {
+			flex-direction: row;
+			justify-content: space-around;
 		}
 
 		.sobre-mi-imagen-texto p {
-			width: 50%;
+			width: 100%;
 			font-size: 18px;
 		}
 
@@ -657,6 +715,17 @@ const t = useTranslations(lang);
 		.contacto-redes i {
 			margin-right: 10px;
 			font-size: 50px;
+		}
+
+		.contacto-mail-contenedor {
+			flex-direction: row;
+			gap: 50px;
+		}
+
+		.contacto-input-contenedor {
+			display: flex;
+			flex-direction: column;
+			width: 50%;
 		}
 	}
 
@@ -692,16 +761,17 @@ const t = useTranslations(lang);
 			border-radius: 30px;
 			margin-top: 20px;
 			color: black;
-			width: 25%;
+			width: 90%;
+			max-width: 350px;
 		}
 
 		.sobre-mi-imagen-texto p {
-		margin-top: 20px;
-	}
+			margin-top: 20px;
+		}
 
-	.sobre-mi-imagen-texto img {
-		margin-top: 20px;
-	}
+		.sobre-mi-imagen-texto img {
+			margin-top: 20px;
+		}
 
 		.sobre-mi-datos span {
 			font-size: 50px;
@@ -715,7 +785,10 @@ const t = useTranslations(lang);
 			font-size: 20px;
 		}
 		.sobre-mi-contenedor {
-			gap: 70px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 25px;
 		}
 
 		.contacto-seccion {

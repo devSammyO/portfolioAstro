@@ -1,6 +1,6 @@
 function bombillaFundida() {
-		  const img = document.querySelector("header img");
-		 
+		  const img = document.querySelector(".foto");
+
 		  if (!img) {
 			console.error("La imagen con clase 'foto' no se encontró.");
 			return;

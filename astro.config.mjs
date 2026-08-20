@@ -1,6 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import vercel from '@astrojs/vercel/static'; // Importa el adaptador de Vercel
+import vercel from '@astrojs/vercel'; // Importa el adaptador de Vercel
 
 // https://astro.build/config
 export default defineConfig({
