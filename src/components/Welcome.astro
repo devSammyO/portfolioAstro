@@ -5,11 +5,7 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<section
-	class="container-fluid d-flex justify-content-center text-center text-white hero-bg"
-	id="inicio"
-	style="height: 100vh;"
->
+<section class="hero-bg section-full" id="inicio">
 	<div class="contenedor">
 		<div>
 			<img class="foto" src="/images/sammy.png" alt="Sammy Odeh" />
@@ -54,15 +50,11 @@ const t = useTranslations(lang);
 	</div>
 	<!-- Redes Sociales -->
 </section>
-<section
-	class="container-fluid d-flex justify-content-center text-center text-white"
-	id="sobre-mi"
-	style="height: auto; background: linear-gradient(to bottom, white, #e0dfdf);"
->
-	<div class="sobre-mi-seccion">
+<section class="section-pad section-alt" id="sobre-mi">
+	<div class="sobre-mi-seccion section-container">
 		<div class="sobre-mi-titulos">
 			<h5>{t("about.aprende")}</h5>
-			<h2 class="section-title text-black">{t("about.aboutMe")}</h2>
+			<h2 class="section-title">{t("about.aboutMe")}</h2>
 		</div>
 		<div class="sobre-mi-contenedor">
 			<div class="sobre-mi-foto">
@@ -104,14 +96,10 @@ const t = useTranslations(lang);
 		</div>
 	</div>
 </section>
-<section
-	id="proyectos"
-	class="proyectos container-fluid d-flex justify-content-center text-center"
-	style="min-height: 100vh; background: linear-gradient(to bottom, #e0dfdf, white);"
->
-	<div class="proyectos-seccion">
+<section class="section-pad" id="proyectos">
+	<div class="proyectos-seccion section-container">
 		<div class="proyectos-titulos">
-			<h2 class="section-title text-black">{t("projects.proyectos")}</h2>
+			<h2 class="section-title">{t("projects.proyectos")}</h2>
 		</div>
 		<div class="proyectos-grid">
 			<div class="proyecto-card">
@@ -164,30 +152,28 @@ const t = useTranslations(lang);
 				</div>
 			</div>
 		</div>
-		<h5 class="mt-5">{t("projects.habilidades")}</h5>
-		<div class="skills">
-			<span class="skill-pill">HTML5</span>
-			<span class="skill-pill">CSS3</span>
-			<span class="skill-pill">JavaScript</span>
-			<span class="skill-pill">TypeScript</span>
-			<span class="skill-pill">Astro</span>
-			<span class="skill-pill">Laravel</span>
-			<span class="skill-pill">PHP</span>
-			<span class="skill-pill">MySQL</span>
-			<span class="skill-pill">Tailwind CSS</span>
-			<span class="skill-pill">Bootstrap</span>
-			<span class="skill-pill">Java</span>
+		<div class="skills-bloque">
+			<h5>{t("projects.habilidades")}</h5>
+			<div class="skills">
+				<span class="skill-pill">HTML5</span>
+				<span class="skill-pill">CSS3</span>
+				<span class="skill-pill">JavaScript</span>
+				<span class="skill-pill">TypeScript</span>
+				<span class="skill-pill">Astro</span>
+				<span class="skill-pill">Laravel</span>
+				<span class="skill-pill">PHP</span>
+				<span class="skill-pill">MySQL</span>
+				<span class="skill-pill">Tailwind CSS</span>
+				<span class="skill-pill">Bootstrap</span>
+				<span class="skill-pill">Java</span>
+			</div>
 		</div>
 	</div>
 </section>
-<section
-	id="contacto"
-	class="contacto container-fluid d-flex justify-content-center text-center"
-	style="min-height: 100vh; background: linear-gradient(to bottom, white, #e0dfdf);"
->
-	<div class="contacto-seccion">
+<section class="section-pad section-alt" id="contacto">
+	<div class="contacto-seccion section-container">
 		<div class="contacto-titulos">
-			<h2 class="section-title text-black">{t("contacto.contacta")}</h2>
+			<h2 class="section-title">{t("contacto.contacta")}</h2>
 			<h5>
 				{t("contacto.hablo")}
 				<img src="/images/spain.png" alt="España" width="24px" />
@@ -243,30 +229,45 @@ const t = useTranslations(lang);
 </section>
 
 <style>
-	@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400..700&family=Inter:wght@400;500;600;700&display=swap");
-
 	.material-symbols-outlined {
-		color: black;
+		color: var(--text);
 		font-size: 30px;
 	}
 
-	body {
-		font-family: "Inter", sans-serif;
+	/* ===== Estructura compartida de secciones ===== */
+	.section-full {
+		min-height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		padding: 110px 24px 60px;
 	}
 
-	h1,
-	h2,
-	h3,
-	h5,
-	h6 {
-		font-family: "Space Grotesk", sans-serif;
+	.section-pad {
+		text-align: center;
+		padding: 140px 24px 80px;
 	}
 
-	a {
-		text-decoration: none;
-		color: inherit;
+	.section-alt {
+		background: var(--bg-alt);
 	}
 
+	.section-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 90%;
+		max-width: 1100px;
+		margin: 0 auto;
+		gap: 50px;
+	}
+
+	.section-title {
+		color: var(--text);
+	}
+
+	/* ===== Hero ===== */
 	.hero-bg {
 		position: relative;
 		overflow: hidden;
@@ -309,58 +310,21 @@ const t = useTranslations(lang);
 		align-items: center;
 		justify-content: center;
 		gap: 30px;
-		margin-top: 0;
 		text-align: center;
+		color: var(--text);
 	}
 
 	.foto {
 		width: 150px;
 		border-radius: 200px;
-		/* animation: bombillaFundida 3s infinite steps(1); */
-	}
-
-	@keyframes bombillaFundida {
-		0% {
-			filter: brightness(1.5);
-		}
-		10% {
-			filter: brightness(0.3);
-		}
-		20% {
-			filter: brightness(1.2);
-		}
-		30% {
-			filter: brightness(0.6);
-		}
-		40% {
-			filter: brightness(1.8);
-		}
-		50% {
-			filter: brightness(0.1);
-		}
-		60% {
-			filter: brightness(1.5);
-		}
-		70% {
-			filter: brightness(0.4);
-		}
-		80% {
-			filter: brightness(1.7);
-		}
-		90% {
-			filter: brightness(0.2);
-		}
-		100% {
-			filter: brightness(1.5);
-		}
 	}
 
 	.section-info {
-		margin-top: 60px;
+		margin-top: 0;
 	}
 
 	.nombre {
-		color: #1abc9c;
+		color: var(--accent);
 	}
 
 	.section-info * {
@@ -369,6 +333,7 @@ const t = useTranslations(lang);
 
 	.section-info-parrafo {
 		display: none;
+		color: var(--text-muted);
 	}
 
 	.botones {
@@ -395,35 +360,35 @@ const t = useTranslations(lang);
 
 	/* Botón Contacto */
 	.btn-contacto {
-		background-color: #1abc9c;
+		background-color: var(--accent);
 		color: black;
-		border: 2px solid #1abc9c;
+		border: 2px solid var(--accent);
 		transition: all 0.3s ease-in-out;
 	}
 
 	.btn-contacto:focus,
 	.btn-cv:focus {
-		outline: 2px solid #1abc9c;
+		outline: 2px solid var(--accent);
 		outline-offset: 3px;
 	}
 
 	.btn-contacto:hover {
 		background-color: transparent;
-		color: #1abc9c;
+		color: var(--accent);
 		transform: translateY(-2px);
 		box-shadow: 0 0 12px rgba(26, 188, 156, 0.4);
 	}
 
 	/* Botón Descargar CV */
 	.btn-cv {
-		color: #1abc9c;
+		color: var(--accent);
 		background-color: transparent;
-		border: 2px solid #1abc9c;
+		border: 2px solid var(--accent);
 	}
 
 	/* Hover Estandarizado */
 	.btn-cv:hover {
-		background-color: #16a085;
+		background-color: var(--accent-hover);
 		color: black;
 		transform: translateY(-2px);
 		box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.15);
@@ -444,7 +409,7 @@ const t = useTranslations(lang);
 		flex-direction: column;
 		gap: 20px;
 		font-size: 30px;
-		z-index: 1000;
+		z-index: 900;
 	}
 
 	.iconos a {
@@ -454,27 +419,28 @@ const t = useTranslations(lang);
 		width: 44px;
 		height: 44px;
 		border-radius: 50%;
-		background: rgba(0, 0, 0, 0.6);
-		color: white;
+		background: var(--bg-elevated);
+		border: 1px solid var(--border-strong);
+		color: var(--text);
 		font-size: 20px;
 		transition: all 0.3s ease;
 	}
 
 	.iconos a:hover {
-		color: #1abc9c;
+		color: var(--accent);
+		border-color: var(--accent);
 		transform: scale(1.15);
 	}
 
+	/* ===== Sobre mí ===== */
 	.sobre-mi-titulos {
-		margin-top: 50px;
-	}
-
-	.section-title {
-		font-size: 28px;
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
 	}
 
 	.sobre-mi-titulos h5 {
-		color: #757272;
+		color: var(--text-muted);
 	}
 
 	.sobre-mi-contenedor {
@@ -482,7 +448,6 @@ const t = useTranslations(lang);
 		flex-direction: column;
 		align-items: center;
 		gap: 30px;
-		margin-top: 40px;
 	}
 
 	.sobre-mi-foto {
@@ -494,7 +459,7 @@ const t = useTranslations(lang);
 		content: "";
 		position: absolute;
 		inset: 14px -14px -14px 14px;
-		background: #1abc9c;
+		background: var(--accent);
 		border-radius: 20px;
 		z-index: 0;
 	}
@@ -507,7 +472,8 @@ const t = useTranslations(lang);
 		aspect-ratio: 4 / 5;
 		object-fit: cover;
 		border-radius: 20px;
-		box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+		border: 1px solid var(--border-strong);
+		box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.5);
 	}
 
 	.sobre-mi-contenido {
@@ -519,7 +485,7 @@ const t = useTranslations(lang);
 	}
 
 	.sobre-mi-parrafo {
-		color: #555;
+		color: var(--text-muted);
 		font-size: 15px;
 		line-height: 1.7;
 		text-align: justify;
@@ -538,38 +504,29 @@ const t = useTranslations(lang);
 	}
 
 	.highlight .material-symbols-outlined {
-		color: #1abc9c;
+		color: var(--accent);
 		font-size: 26px;
 		flex-shrink: 0;
 	}
 
 	.highlight h6 {
 		margin: 0;
-		color: black;
+		color: var(--text);
 		font-size: 15px;
 	}
 
 	.highlight p {
 		margin: 0;
-		color: #757272;
+		color: var(--text-dim);
 		font-size: 13px;
 	}
 
-	.proyectos-seccion {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		width: 90%;
-		max-width: 1000px;
-		margin: 0 auto;
-	}
-
+	/* ===== Proyectos ===== */
 	.proyectos-titulos {
-		margin-top: 100px;
+		display: flex;
 	}
 
 	.proyectos-grid {
-		margin-top: 30px;
 		display: grid;
 		grid-template-columns: 1fr;
 		gap: 30px;
@@ -580,17 +537,19 @@ const t = useTranslations(lang);
 		display: flex;
 		flex-direction: column;
 		text-align: left;
-		background: white;
+		background: var(--bg-elevated);
 		border-radius: 16px;
 		overflow: hidden;
-		border: 1px solid rgba(0, 0, 0, 0.08);
-		box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.06);
-		transition: transform 0.3s ease, box-shadow 0.3s ease;
+		border: 1px solid var(--border);
+		box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.35);
+		transition: transform 0.3s ease, box-shadow 0.3s ease,
+			border-color 0.3s ease;
 	}
 
 	.proyecto-card:hover {
 		transform: translateY(-6px);
-		box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.12);
+		border-color: var(--accent);
+		box-shadow: 0px 16px 40px rgba(0, 0, 0, 0.5);
 	}
 
 	.proyecto-imagen-link {
@@ -617,7 +576,7 @@ const t = useTranslations(lang);
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background: rgba(0, 0, 0, 0.55);
+		background: rgba(0, 0, 0, 0.65);
 		color: white;
 		font-weight: bold;
 		text-transform: uppercase;
@@ -636,12 +595,12 @@ const t = useTranslations(lang);
 	}
 
 	.proyecto-info h3 {
-		color: black;
+		color: var(--text);
 	}
 
 	.proyecto-info p {
 		margin-top: 10px;
-		color: #757272;
+		color: var(--text-muted);
 		font-size: 14px;
 	}
 
@@ -653,16 +612,26 @@ const t = useTranslations(lang);
 	}
 
 	.tech-tag {
-		background: rgba(26, 188, 156, 0.12);
-		color: #16a085;
+		background: var(--accent-soft);
+		color: var(--accent);
 		font-size: 12px;
 		font-weight: bold;
 		padding: 4px 10px;
 		border-radius: 20px;
 	}
 
+	.skills-bloque {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 20px;
+	}
+
+	.skills-bloque h5 {
+		color: var(--text-muted);
+	}
+
 	.skills {
-		margin-top: 20px;
 		display: flex;
 		flex-wrap: wrap;
 		gap: 10px;
@@ -670,41 +639,35 @@ const t = useTranslations(lang);
 	}
 
 	.skill-pill {
-		background: white;
-		border: 1px solid rgba(0, 0, 0, 0.08);
-		color: #333;
+		background: var(--bg-elevated);
+		border: 1px solid var(--border);
+		color: var(--text-muted);
 		font-size: 14px;
 		font-weight: 600;
 		padding: 8px 18px;
 		border-radius: 20px;
-		box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
 		transition: transform 0.25s ease, border-color 0.25s ease,
 			color 0.25s ease;
 	}
 
 	.skill-pill:hover {
 		transform: translateY(-3px);
-		border-color: #1abc9c;
-		color: #16a085;
+		border-color: var(--accent);
+		color: var(--accent);
 	}
 
-	.contacto-seccion {
+	/* ===== Contacto ===== */
+	.contacto-titulos {
 		display: flex;
 		flex-direction: column;
-		align-items: center;
-		width: 90%;
-	}
-
-	.contacto-titulos {
-		margin-top: 100px;
+		gap: 6px;
 	}
 
 	.contacto-titulos h5 {
-		color: #757272;
+		color: var(--text-muted);
 	}
 
 	.contacto-grid {
-		margin-top: 40px;
 		display: grid;
 		grid-template-columns: 1fr;
 		gap: 16px;
@@ -717,10 +680,10 @@ const t = useTranslations(lang);
 		align-items: center;
 		gap: 16px;
 		padding: 18px 20px;
-		background: white;
-		border: 1px solid rgba(0, 0, 0, 0.08);
+		background: var(--bg-elevated);
+		border: 1px solid var(--border);
 		border-radius: 14px;
-		box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+		box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.35);
 		text-align: left;
 		transition: transform 0.3s ease, box-shadow 0.3s ease,
 			border-color 0.3s ease;
@@ -728,13 +691,13 @@ const t = useTranslations(lang);
 
 	.contacto-card:hover {
 		transform: translateY(-4px);
-		box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
-		border-color: #1abc9c;
+		border-color: var(--accent);
+		box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.5);
 	}
 
 	.contacto-card i {
 		font-size: 26px;
-		color: #1abc9c;
+		color: var(--accent);
 		flex-shrink: 0;
 		width: 30px;
 		text-align: center;
@@ -742,13 +705,13 @@ const t = useTranslations(lang);
 
 	.contacto-card h6 {
 		margin: 0;
-		color: black;
+		color: var(--text);
 		font-size: 15px;
 	}
 
 	.contacto-card p {
 		margin: 0;
-		color: #757272;
+		color: var(--text-muted);
 		font-size: 13px;
 	}
 
@@ -756,14 +719,15 @@ const t = useTranslations(lang);
 		width: 100%;
 		margin-top: 20px;
 		color: black;
-		background-color: #1abc9c;
+		background-color: var(--accent);
 		border-radius: 5px;
+		border: none;
 		transition: all 0.3s ease-in-out;
 		box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 	}
 
 	button:hover {
-		background-color: #16a085;
+		background-color: var(--accent-hover);
 		transform: scale(1.05);
 	}
 
@@ -773,8 +737,8 @@ const t = useTranslations(lang);
 			align-items: center;
 			justify-content: center;
 			gap: clamp(40px, 6vw, 100px);
-			min-height: 80vh;
 		}
+
 		.section-info {
 			text-align: justify;
 		}
@@ -817,16 +781,11 @@ const t = useTranslations(lang);
 			width: 500px;
 		}
 
-		.sobre-mi-titulos {
-			margin-top: 100px;
-		}
-
 		.sobre-mi-contenedor {
 			flex-direction: row;
 			align-items: center;
 			justify-content: center;
 			gap: 70px;
-			margin-top: 60px;
 		}
 
 		.sobre-mi-foto {
@@ -877,7 +836,7 @@ const t = useTranslations(lang);
 		}
 
 		.section-info h5 {
-			color: #1abc9c;
+			color: var(--accent);
 		}
 
 		.sobre-mi-foto {
@@ -902,10 +861,6 @@ const t = useTranslations(lang);
 
 		.highlight p {
 			font-size: 14px;
-		}
-
-		.contacto-seccion {
-			width: 80%;
 		}
 
 		.section-title {
