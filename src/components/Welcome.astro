@@ -1,5 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import Security from "./Security.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -41,15 +42,18 @@ const t = useTranslations(lang);
 			</a>
 		</div>
 	</div>
+	<a href="#sobre-mi" class="scroll-down" aria-label="Scroll down">
+		<i class="fa-solid fa-chevron-down"></i>
+	</a>
 	<!-- Redes Sociales -->
 </section>
 <section class="section-pad section-alt" id="sobre-mi">
 	<div class="sobre-mi-seccion section-container">
-		<div class="sobre-mi-titulos">
+		<div class="sobre-mi-titulos reveal">
 			<h5>{t("about.aprende")}</h5>
 			<h2 class="section-title">{t("about.aboutMe")}</h2>
 		</div>
-		<div class="sobre-mi-contenedor">
+		<div class="sobre-mi-contenedor reveal">
 			<div class="sobre-mi-foto">
 				<img src="/images/sammyteclado.png" alt="Sammy Odeh" />
 			</div>
@@ -89,16 +93,17 @@ const t = useTranslations(lang);
 		</div>
 	</div>
 </section>
-<section class="section-pad" id="proyectos">
+<Security />
+<section class="section-pad section-alt" id="proyectos">
 	<div class="proyectos-seccion section-container">
-		<div class="proyectos-titulos">
+		<div class="proyectos-titulos reveal">
 			<h2 class="section-title">{t("projects.proyectos")}</h2>
 		</div>
-		<div class="proyectos-grid">
+		<div class="proyectos-grid reveal">
 			<div class="proyecto-card">
 				<a
 					class="proyecto-imagen-link"
-					href="https://padelges-production.up.railway.app/"
+					href="https://padel-web-production-352d.up.railway.app/"
 					target="_blank"
 					rel="noopener noreferrer"
 				>
@@ -145,7 +150,7 @@ const t = useTranslations(lang);
 				</div>
 			</div>
 		</div>
-		<div class="skills-bloque">
+		<div class="skills-bloque reveal">
 			<h5>{t("projects.habilidades")}</h5>
 			<div class="skills">
 				<span class="skill-pill">HTML5</span>
@@ -163,17 +168,19 @@ const t = useTranslations(lang);
 		</div>
 	</div>
 </section>
-<section class="section-pad section-alt" id="contacto">
+<section class="section-pad" id="contacto">
 	<div class="contacto-seccion section-container">
-		<div class="contacto-titulos">
+		<div class="contacto-titulos reveal">
 			<h2 class="section-title">{t("contacto.contacta")}</h2>
-			<h5>
-				{t("contacto.hablo")}
-				<img src="/images/spain.png" alt="España" width="24px" />
-				<img src="/images/united-kingdom.png" alt="uk" width="24px" />
+			<h5 class="contacto-idiomas">
+				<span>{t("contacto.hablo")}</span>
+				<span class="contacto-banderas">
+					<img src="/images/spain.png" alt="España" width="24px" />
+					<img src="/images/united-kingdom.png" alt="uk" width="24px" />
+				</span>
 			</h5>
 		</div>
-		<div class="contacto-grid">
+		<div class="contacto-grid reveal">
 			<a class="contacto-card" href="mailto:sam_po13@hotmail.com">
 				<i class="fa-solid fa-envelope"></i>
 				<div>
@@ -227,39 +234,6 @@ const t = useTranslations(lang);
 		font-size: 30px;
 	}
 
-	/* ===== Estructura compartida de secciones ===== */
-	.section-full {
-		min-height: 100vh;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		text-align: center;
-		padding: 110px 24px 60px;
-	}
-
-	.section-pad {
-		text-align: center;
-		padding: 140px 24px 80px;
-	}
-
-	.section-alt {
-		background: var(--bg-alt);
-	}
-
-	.section-container {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		width: 90%;
-		max-width: 1100px;
-		margin: 0 auto;
-		gap: 50px;
-	}
-
-	.section-title {
-		color: var(--text);
-	}
-
 	/* ===== Hero ===== */
 	.hero-bg {
 		position: relative;
@@ -307,9 +281,46 @@ const t = useTranslations(lang);
 		color: var(--text);
 	}
 
+	.scroll-down {
+		position: absolute;
+		bottom: 28px;
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: 1;
+		color: var(--text-dim);
+		font-size: 18px;
+		animation: scroll-bounce 2s ease-in-out infinite;
+		transition: color 0.25s ease;
+	}
+
+	.scroll-down:hover {
+		color: var(--accent);
+	}
+
+	@keyframes scroll-bounce {
+		0%,
+		100% {
+			transform: translate(-50%, 0);
+		}
+		50% {
+			transform: translate(-50%, 8px);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.scroll-down {
+			animation: none;
+		}
+	}
+
 	.foto {
 		width: 150px;
-		border-radius: 200px;
+		aspect-ratio: 1 / 1;
+		object-fit: cover;
+		border-radius: 50%;
+		border: 3px solid var(--accent);
+		box-shadow: 0 0 0 6px rgba(26, 188, 156, 0.12),
+			0px 20px 40px rgba(0, 0, 0, 0.5);
 	}
 
 	.section-info {
@@ -317,7 +328,35 @@ const t = useTranslations(lang);
 	}
 
 	.nombre {
-		color: var(--accent);
+		background: linear-gradient(
+			90deg,
+			var(--accent),
+			#5ee7c8,
+			var(--accent)
+		);
+		background-size: 200% auto;
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+		animation: gradient-shift 6s ease-in-out infinite;
+	}
+
+	@keyframes gradient-shift {
+		0% {
+			background-position: 0% 50%;
+		}
+		50% {
+			background-position: 100% 50%;
+		}
+		100% {
+			background-position: 0% 50%;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.nombre {
+			animation: none;
+		}
 	}
 
 	.section-info * {
@@ -481,7 +520,6 @@ const t = useTranslations(lang);
 		color: var(--text-muted);
 		font-size: 15px;
 		line-height: 1.7;
-		text-align: justify;
 	}
 
 	.sobre-mi-highlights {
@@ -613,42 +651,6 @@ const t = useTranslations(lang);
 		border-radius: 20px;
 	}
 
-	.skills-bloque {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 20px;
-	}
-
-	.skills-bloque h5 {
-		color: var(--text-muted);
-	}
-
-	.skills {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 10px;
-		justify-content: center;
-	}
-
-	.skill-pill {
-		background: var(--bg-elevated);
-		border: 1px solid var(--border);
-		color: var(--text-muted);
-		font-size: 14px;
-		font-weight: 600;
-		padding: 8px 18px;
-		border-radius: 20px;
-		transition: transform 0.25s ease, border-color 0.25s ease,
-			color 0.25s ease;
-	}
-
-	.skill-pill:hover {
-		transform: translateY(-3px);
-		border-color: var(--accent);
-		color: var(--accent);
-	}
-
 	/* ===== Contacto ===== */
 	.contacto-titulos {
 		display: flex;
@@ -658,6 +660,22 @@ const t = useTranslations(lang);
 
 	.contacto-titulos h5 {
 		color: var(--text-muted);
+	}
+
+	.contacto-idiomas {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.contacto-banderas {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+	}
+
+	.contacto-banderas img {
+		display: inline-block;
 	}
 
 	.contacto-grid {
@@ -733,12 +751,11 @@ const t = useTranslations(lang);
 		}
 
 		.section-info {
-			text-align: justify;
+			text-align: left;
 		}
 
 		.section-info-parrafo {
 			display: block;
-			text-align: justify;
 		}
 
 		.botones {
@@ -796,10 +813,6 @@ const t = useTranslations(lang);
 			grid-template-columns: repeat(2, 1fr);
 		}
 
-		.section-title {
-			font-size: 36px;
-		}
-
 		.contacto-grid {
 			grid-template-columns: repeat(2, 1fr);
 			max-width: 700px;
@@ -854,10 +867,6 @@ const t = useTranslations(lang);
 
 		.highlight p {
 			font-size: 14px;
-		}
-
-		.section-title {
-			font-size: 48px;
 		}
 	}
 </style>

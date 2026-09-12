@@ -46,9 +46,12 @@ const t = useTranslations(lang);
 	</head>
 	<body>
 		<!-- Header -->
-		<header class="site-header">
+		<header class="site-header" id="siteHeader">
 			<div class="nav-container">
-				<a class="nav-brand" href="/#inicio">Sammy<span>.</span>Odeh</a>
+				<a class="nav-brand" href="/#inicio">
+					<span class="status-dot" role="img" aria-label={t('nav.disponible')} title={t('nav.disponible')}></span>
+					Sammy<span>.</span>Odeh
+				</a>
 
 				<button
 					class="nav-toggle"
@@ -58,16 +61,24 @@ const t = useTranslations(lang);
 					aria-expanded="false"
 					aria-controls="navMenu"
 				>
-					<i class="fa-solid fa-bars"></i>
+					<span class="nav-toggle-bar"></span>
+					<span class="nav-toggle-bar"></span>
+					<span class="nav-toggle-bar"></span>
 				</button>
 
-				<nav class="nav-menu" id="navMenu">
-					<a class="nav-link" href='/#inicio'>{t('nav.home')}</a>
-					<a class="nav-link" href="#sobre-mi">{t('nav.about')}</a>
-					<a class="nav-link" href="#proyectos">{t('nav.projects')}</a>
-					<a class="nav-link" href="#contacto">{t('nav.contact')}</a>
-					<LanguagePicker />
-				</nav>
+				<div class="nav-menu" id="navMenu">
+					<nav class="nav-links">
+						<span class="nav-pill" id="navPill" aria-hidden="true"></span>
+						<a class="nav-link" href='/#inicio'>{t('nav.home')}</a>
+						<a class="nav-link" href="#sobre-mi">{t('nav.about')}</a>
+						<a class="nav-link" href="#seguridad">{t('nav.security')}</a>
+						<a class="nav-link" href="#proyectos">{t('nav.projects')}</a>
+						<a class="nav-link" href="#contacto">{t('nav.contact')}</a>
+					</nav>
+					<div class="nav-lang">
+						<LanguagePicker />
+					</div>
+				</div>
 			</div>
 		</header>
 
@@ -87,6 +98,9 @@ const t = useTranslations(lang);
 		<script src="/js/descargarCv.js" defer></script>
 		<script src="/js/scrollspy.js" defer></script>
 		<script src="/js/navToggle.js" defer></script>
+		<script src="/js/reveal.js" defer></script>
+		<script src="/js/navPill.js" defer></script>
+		<script src="/js/headerScroll.js" defer></script>
 	</body>
 </html>
 
@@ -110,6 +124,25 @@ const t = useTranslations(lang);
 	*::before,
 	*::after {
 		box-sizing: border-box;
+	}
+
+	.reveal {
+		opacity: 0;
+		transform: translateY(24px);
+		transition: opacity 0.6s ease, transform 0.6s ease;
+	}
+
+	.reveal.in-view {
+		opacity: 1;
+		transform: none;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.reveal {
+			opacity: 1;
+			transform: none;
+			transition: none;
+		}
 	}
 
 	html,
@@ -154,7 +187,7 @@ const t = useTranslations(lang);
 
 	html {
 		scroll-behavior: smooth;
-		scroll-padding-top: 90px;
+		scroll-padding-top: 100px;
 	}
 
 	body {
@@ -173,33 +206,155 @@ const t = useTranslations(lang);
 		text-decoration: none;
 		color: inherit;
 	}
+
+	/* ===== Estructura compartida de secciones ===== */
+	.section-full {
+		min-height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		padding: 110px 24px 60px;
+	}
+
+	.section-pad {
+		text-align: center;
+		padding: 140px 24px 80px;
+	}
+
+	.section-alt {
+		background: var(--bg-alt);
+	}
+
+	.section-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 90%;
+		max-width: 1100px;
+		margin: 0 auto;
+		gap: 50px;
+	}
+
+	.section-title {
+		color: var(--text);
+	}
+
+	/* ===== Pills de habilidades compartidas ===== */
+	.skills-bloque {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 20px;
+	}
+
+	.skills-bloque h5 {
+		color: var(--text-muted);
+	}
+
+	.skills {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		justify-content: center;
+	}
+
+	.skill-pill {
+		background: var(--bg-elevated);
+		border: 1px solid var(--border);
+		color: var(--text-muted);
+		font-size: 14px;
+		font-weight: 600;
+		padding: 8px 18px;
+		border-radius: 20px;
+		transition: transform 0.25s ease, border-color 0.25s ease,
+			color 0.25s ease;
+	}
+
+	.skill-pill:hover {
+		transform: translateY(-3px);
+		border-color: var(--accent);
+		color: var(--accent);
+	}
+
+	@media screen and (min-width: 988px) {
+		.section-title {
+			font-size: 36px;
+		}
+	}
+
+	@media screen and (min-width: 1250px) {
+		.section-title {
+			font-size: 48px;
+		}
+	}
 </style>
 
 <style>
 	.site-header {
 		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
+		top: 16px;
+		left: 16px;
+		right: 16px;
+		margin-inline: auto;
+		max-width: 900px;
 		z-index: 1000;
-		background: rgba(5, 7, 10, 0.75);
-		backdrop-filter: blur(12px);
-		-webkit-backdrop-filter: blur(12px);
-		border-bottom: 1px solid var(--border);
+		border-radius: 999px;
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+		transition: top 0.3s ease, box-shadow 0.3s ease,
+			transform 0.4s ease, border-radius 0.3s ease;
+	}
+
+	/*
+	 * The glass background lives on ::before (not on .site-header itself)
+	 * because backdrop-filter/transform on an element creates a new
+	 * containing block for its position:fixed descendants — and .nav-menu
+	 * (the fullscreen mobile menu) is one of those descendants. Keeping
+	 * .site-header itself filter/transform-free in its base state lets
+	 * .nav-menu size against the real viewport instead of the header pill.
+	 */
+	.site-header::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		border-radius: inherit;
+		background: rgba(16, 20, 27, 0.55);
+		border: 1px solid var(--border);
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
+		transition: background 0.3s ease;
+	}
+
+	.site-header.is-scrolled {
+		top: 10px;
+		box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5);
+	}
+
+	.site-header.is-scrolled::before {
+		background: rgba(8, 10, 14, 0.85);
+	}
+
+	.site-header.is-hidden {
+		transform: translateY(-140%);
 	}
 
 	.nav-container {
-		max-width: var(--container-width);
 		margin: 0 auto;
-		padding: 16px 24px;
+		padding: 12px 20px;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 	}
 
 	.nav-brand {
+		position: relative;
+		z-index: 1001;
+		display: flex;
+		align-items: center;
+		gap: 10px;
 		font-family: "Space Grotesk", sans-serif;
-		font-size: 20px;
+		font-size: 18px;
 		font-weight: 700;
 		color: var(--text);
 	}
@@ -208,39 +363,107 @@ const t = useTranslations(lang);
 		color: var(--accent);
 	}
 
+	.status-dot {
+		position: relative;
+		display: inline-block;
+		width: 8px;
+		height: 8px;
+		flex-shrink: 0;
+		border-radius: 50%;
+		background: #22c55e;
+	}
+
+	.status-dot::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		border-radius: 50%;
+		background: inherit;
+		animation: status-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+	}
+
+	@keyframes status-ping {
+		0% {
+			transform: scale(1);
+			opacity: 0.7;
+		}
+		75%,
+		100% {
+			transform: scale(2.6);
+			opacity: 0;
+		}
+	}
+
 	.nav-toggle {
-		display: block;
+		position: relative;
+		z-index: 1001;
+		width: 22px;
+		height: 16px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 		background: none;
 		border: none;
-		color: var(--text);
-		font-size: 22px;
 		cursor: pointer;
-		padding: 4px;
+		padding: 0;
+	}
+
+	.nav-toggle-bar {
+		display: block;
+		width: 100%;
+		height: 2px;
+		border-radius: 2px;
+		background: var(--text);
+		transition: transform 0.3s ease, opacity 0.3s ease;
+	}
+
+	.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) {
+		transform: translateY(7px) rotate(45deg);
+	}
+
+	.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) {
+		opacity: 0;
+	}
+
+	.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3) {
+		transform: translateY(-7px) rotate(-45deg);
 	}
 
 	.nav-menu {
 		position: fixed;
-		top: 65px;
-		left: 0;
-		width: 100%;
+		inset: 0;
+		z-index: 999;
 		background: rgba(5, 7, 10, 0.97);
-		backdrop-filter: blur(12px);
-		border-bottom: 1px solid var(--border);
+		backdrop-filter: blur(20px);
+		-webkit-backdrop-filter: blur(20px);
 		display: flex;
 		flex-direction: column;
-		align-items: flex-start;
-		padding: 10px 24px 24px;
-		gap: 4px;
-		transform: translateY(-8px);
+		align-items: center;
+		justify-content: center;
+		gap: 40px;
+		transform: translateX(100%);
 		opacity: 0;
 		pointer-events: none;
-		transition: transform 0.25s ease, opacity 0.25s ease;
+		transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+			opacity 0.3s ease;
 	}
 
 	.nav-menu.open {
-		transform: translateY(0);
+		transform: translateX(0);
 		opacity: 1;
 		pointer-events: auto;
+	}
+
+	.nav-links {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 28px;
+	}
+
+	.nav-pill {
+		display: none;
 	}
 
 	.nav-link {
@@ -248,30 +471,51 @@ const t = useTranslations(lang);
 		display: inline-block;
 		padding: 10px 0;
 		color: var(--text-muted);
-		font-size: 15px;
-		font-weight: 500;
+		font-family: "Space Grotesk", sans-serif;
+		font-size: 26px;
+		font-weight: 600;
 		width: fit-content;
+		opacity: 0;
+		transform: translateY(14px);
+		transition: opacity 0.4s ease, transform 0.4s ease,
+			color 0.25s ease;
 	}
 
-	.nav-link::after {
-		content: "";
-		position: absolute;
-		width: 0;
-		height: 2px;
-		bottom: 4px;
-		left: 0;
-		background-color: var(--accent);
-		transition: width 0.3s ease;
+	.nav-menu.open .nav-link {
+		opacity: 1;
+		transform: none;
 	}
 
-	.nav-link:hover::after,
-	.nav-link.active::after {
-		width: 100%;
+	.nav-link:nth-of-type(1) {
+		transition-delay: 0.05s;
+	}
+	.nav-link:nth-of-type(2) {
+		transition-delay: 0.1s;
+	}
+	.nav-link:nth-of-type(3) {
+		transition-delay: 0.15s;
+	}
+	.nav-link:nth-of-type(4) {
+		transition-delay: 0.2s;
+	}
+	.nav-link:nth-of-type(5) {
+		transition-delay: 0.25s;
 	}
 
 	.nav-link:hover,
 	.nav-link.active {
 		color: var(--accent);
+	}
+
+	.nav-lang {
+		opacity: 0;
+		transform: translateY(14px);
+		transition: opacity 0.4s ease 0.3s, transform 0.4s ease 0.3s;
+	}
+
+	.nav-menu.open .nav-lang {
+		opacity: 1;
+		transform: none;
 	}
 
 	.footer-site {
@@ -294,17 +538,53 @@ const t = useTranslations(lang);
 
 		.nav-menu {
 			position: static;
+			inset: auto;
 			flex-direction: row;
 			align-items: center;
 			width: auto;
-			gap: 32px;
+			gap: 28px;
 			background: none;
 			border: none;
 			padding: 0;
 			backdrop-filter: none;
+			-webkit-backdrop-filter: none;
 			transform: none;
 			opacity: 1;
 			pointer-events: auto;
+		}
+
+		.nav-links {
+			flex-direction: row;
+			align-items: center;
+			gap: 4px;
+		}
+
+		.nav-pill {
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			border-radius: 999px;
+			background: var(--accent-soft);
+			opacity: 0;
+			transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+				width 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+		}
+
+		.nav-link {
+			padding: 8px 16px;
+			font-family: "Inter", sans-serif;
+			font-size: 15px;
+			font-weight: 500;
+			opacity: 1;
+			transform: none;
+			transition: color 0.25s ease;
+		}
+
+		.nav-lang {
+			opacity: 1;
+			transform: none;
 		}
 	}
 </style>
