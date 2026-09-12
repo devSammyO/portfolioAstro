@@ -5,26 +5,65 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function mostrarSwal() {
     Swal.fire({
-        title: "¡Ponte en contacto conmigo!",
+        title: false,
+        background: 'transparent',
+        showConfirmButton: false,
+        showCloseButton: true,
+        width: 'min(380px, 92vw)',
+        padding: 0,
+        customClass: {
+            popup: 'contact-modal-popup',
+            closeButton: 'contact-modal-close',
+        },
         html: `
-            <div style="display: flex; flex-direction: column; gap: 10px;">
-                <a href="tel:+34636731525" style="padding: 10px; background: #4CAF50; color: white; text-align: center; border-radius: 5px; text-decoration: none;">
-                    📞 Llamar
-                </a>
-                <a href="https://wa.me/636731525" target="_blank" style="padding: 10px; background: #25D366; color: white; text-align: center; border-radius: 5px; text-decoration: none;">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 8px;">
-                    WhatsApp
-                </a>
-                <a href="mailto:sam_po13@hotmail.com" style="padding: 10px; background: #007BFF; color: white; text-align: center; border-radius: 5px; text-decoration: none;">
-                    ✉️ Email
-                </a>
+            <div class="term-window contact-modal">
+                <div class="term-bar">
+                    <span class="term-dot term-dot-red"></span>
+                    <span class="term-dot term-dot-yellow"></span>
+                    <span class="term-dot term-dot-green"></span>
+                    <span class="term-bar-title">sammy@portfolio: ~/contacto</span>
+                </div>
+                <div class="contact-modal-body">
+                    <p class="contact-modal-prompt">
+                        <span class="contact-modal-prompt-arrow">&gt;</span> elige un canal
+                    </p>
+                    <a
+                        href="tel:+34636731525"
+                        class="btn btn-ghost contact-modal-link"
+                        data-spotlight
+                    >
+                        <span class="btn-spotlight" aria-hidden="true"></span>
+                        <span class="btn-content">
+                            <i class="fa-solid fa-phone btn-icon" aria-hidden="true"></i>
+                            Llamar
+                        </span>
+                    </a>
+                    <a
+                        href="https://wa.me/34636731525"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn btn-ghost contact-modal-link"
+                        data-spotlight
+                    >
+                        <span class="btn-spotlight" aria-hidden="true"></span>
+                        <span class="btn-content">
+                            <i class="fa-brands fa-whatsapp btn-icon" aria-hidden="true"></i>
+                            WhatsApp
+                        </span>
+                    </a>
+                    <a
+                        href="mailto:sam_po13@hotmail.com"
+                        class="btn btn-ghost contact-modal-link"
+                        data-spotlight
+                    >
+                        <span class="btn-spotlight" aria-hidden="true"></span>
+                        <span class="btn-content">
+                            <i class="fa-solid fa-envelope btn-icon" aria-hidden="true"></i>
+                            Email
+                        </span>
+                    </a>
+                </div>
             </div>
         `,
-        imageUrl: '/images/satelite.png', // Aquí va la URL de tu imagen
-        imageWidth: 100, // Ajusta el tamaño de la imagen si es necesario
-        imageHeight: 100, // Ajusta el tamaño de la imagen si es necesario
-        imageAlt: 'Custom image', // Alt text para la imagen
     });
 }
-
-

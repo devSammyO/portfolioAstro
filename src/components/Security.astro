@@ -4,26 +4,60 @@ import { getLangFromUrl, useTranslations } from "../i18n/utils";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const pentestingSkills = [
-	"Nmap",
-	"Burp Suite",
-	"Metasploit",
-	"Wireshark",
-	"Hydra",
-	"Gobuster",
-	"Ligolo-ng",
-	"Kali Linux",
-];
-
-const hardeningSkills = [
-	"Wazuh",
-	"Suricata",
-	"pfSense",
-	"Squid",
-	"VLANs",
-	"DMZ",
-	"iptables",
-	"CIS Benchmarks",
+const arsenalGroups = [
+	{
+		icon: "fa-solid fa-crosshairs",
+		title: t("security.catOfensivaTitulo"),
+		items: [
+			t("security.catOfensiva1"),
+			t("security.catOfensiva2"),
+			t("security.catOfensiva3"),
+			t("security.catOfensiva4"),
+			t("security.catOfensiva5"),
+			"MITRE ATT&CK",
+			"DevSecOps",
+		],
+	},
+	{
+		icon: "fa-solid fa-toolbox",
+		title: t("security.catHerramientasTitulo"),
+		items: [
+			"Wazuh",
+			"Suricata",
+			"Nmap",
+			"Metasploit",
+			"Burp Suite",
+			"Caido",
+			"Wireshark",
+			"Autopsy",
+		],
+	},
+	{
+		icon: "fa-solid fa-shield-halved",
+		title: t("security.catDefensivaTitulo"),
+		items: [
+			t("security.catDefensiva1"),
+			t("security.catDefensiva2"),
+			t("security.catDefensiva3"),
+			"OWASP",
+			t("security.catDefensiva4"),
+			"ISO 27001",
+		],
+	},
+	{
+		icon: "fa-solid fa-network-wired",
+		title: t("security.catRedesTitulo"),
+		items: [
+			t("security.catRedes1"),
+			"VPN",
+			t("security.catRedes2"),
+			"Mikrotik",
+			"pfSense",
+			"PKI",
+			"WSUS",
+			t("security.catRedes3"),
+		],
+	},
 ];
 
 const platforms = [
@@ -42,34 +76,43 @@ const platforms = [
 ];
 ---
 
-<section class="section-pad section-alt" id="seguridad">
+<section class="section-pad section-alt seguridad-section" id="seguridad">
 	<div class="seguridad-seccion section-container">
 		<div class="seguridad-titulos reveal">
-			<h5>{t("security.eyebrow")}</h5>
-			<h2 class="section-title">{t("security.titulo")}</h2>
+			<span class="section-tag">
+				<span class="section-tag-path">~/seguridad</span>
+				<span class="section-tag-dot" aria-hidden="true"></span>
+				{t("security.eyebrow")}
+			</span>
+			<h2 class="section-title" data-scramble>{t("security.titulo")}</h2>
 			<p class="seguridad-subtitulo">{t("security.subtitulo")}</p>
 		</div>
 
-		<div class="skills-columnas reveal">
-			<div class="skills-columna">
-				<h6>{t("security.pentestingTitulo")}</h6>
-				<div class="skills">
-					{
-						pentestingSkills.map((skill) => (
-							<span class="skill-pill">{skill}</span>
-						))
-					}
-				</div>
+		<div class="arsenal term-window reveal">
+			<div class="term-bar">
+				<span class="term-dot term-dot-red"></span>
+				<span class="term-dot term-dot-yellow"></span>
+				<span class="term-dot term-dot-green"></span>
+				<span class="term-bar-title">security@sammy: ~/arsenal</span>
 			</div>
-			<div class="skills-columna">
-				<h6>{t("security.hardeningTitulo")}</h6>
-				<div class="skills">
-					{
-						hardeningSkills.map((skill) => (
-							<span class="skill-pill">{skill}</span>
-						))
-					}
-				</div>
+			<div class="arsenal-body skills-matrix">
+				{
+					arsenalGroups.map((group) => (
+						<div class="skills-panel">
+							<div class="skills-panel-head">
+								<span class="skills-panel-icon">
+									<i class={group.icon} />
+								</span>
+								<h6>{group.title}</h6>
+							</div>
+							<div class="skills">
+								{group.items.map((item) => (
+									<span class="skill-pill">{item}</span>
+								))}
+							</div>
+						</div>
+					))
+				}
 			</div>
 		</div>
 
@@ -83,12 +126,20 @@ const platforms = [
 							href={p.href}
 							target="_blank"
 							rel="noopener noreferrer"
+							data-spotlight
 						>
-							<i class={p.icon}></i>
-							<div>
+							<span class="btn-spotlight" aria-hidden="true"></span>
+							<span class="plataforma-icono">
+								<i class={p.icon} />
+							</span>
+							<div class="plataforma-info">
 								<h6>{p.name}</h6>
 								<p>{p.stat}</p>
 							</div>
+							<i
+								class="fa-solid fa-arrow-up-right-from-square plataforma-arrow"
+								aria-hidden="true"
+							/>
 						</a>
 					))
 				}
@@ -104,21 +155,35 @@ const platforms = [
 					target="_blank"
 					rel="noopener noreferrer"
 				>
-					<div class="writeup-header">
-						<i class="fa-brands fa-github"></i>
-						<span class="writeup-plataforma"
-							>{t("security.writeup1Plataforma")}</span
-						>
+					<div class="term-bar">
+						<span class="term-dot term-dot-red"></span>
+						<span class="term-dot term-dot-yellow"></span>
+						<span class="term-dot term-dot-green"></span>
+						<span class="term-bar-title">
+							<i class="fa-brands fa-github" />
+							{t("security.writeup1Plataforma")}
+						</span>
 					</div>
-					<h3>{t("security.writeup1Titulo")}</h3>
-					<p>{t("security.writeup1Desc")}</p>
-					<div class="writeup-tags">
-						<span class="tech-tag">Nmap</span>
-						<span class="tech-tag">Hydra</span>
-						<span class="tech-tag">Metasploit</span>
-						<span class="tech-tag">Ligolo-ng</span>
+					<div class="writeup-body">
+						<h3>{t("security.writeup1Titulo")}</h3>
+						<p>{t("security.writeup1Desc")}</p>
+						<div class="writeup-tags">
+							<span class="tech-tag">Nmap</span>
+							<span class="tech-tag">Hydra</span>
+							<span class="tech-tag">Metasploit</span>
+							<span class="tech-tag">Ligolo-ng</span>
+						</div>
+						<span class="writeup-link btn btn-ghost btn-sm" data-spotlight>
+							<span class="btn-spotlight" aria-hidden="true"></span>
+							<span class="btn-content">
+								{t("security.leerWriteup")}
+								<i
+									class="fa-solid fa-arrow-up-right-from-square btn-icon"
+									aria-hidden="true"
+								/>
+							</span>
+						</span>
 					</div>
-					<span class="writeup-link">{t("security.leerWriteup")} ↗</span>
 				</a>
 				<a
 					class="writeup-card"
@@ -126,44 +191,92 @@ const platforms = [
 					target="_blank"
 					rel="noopener noreferrer"
 				>
-					<div class="writeup-header">
-						<i class="fa-solid fa-file-pdf"></i>
-						<span class="writeup-plataforma"
-							>{t("security.writeup2Plataforma")}</span
-						>
+					<div class="term-bar">
+						<span class="term-dot term-dot-red"></span>
+						<span class="term-dot term-dot-yellow"></span>
+						<span class="term-dot term-dot-green"></span>
+						<span class="term-bar-title">
+							<i class="fa-solid fa-file-pdf" />
+							{t("security.writeup2Plataforma")}
+						</span>
 					</div>
-					<h3>{t("security.writeup2Titulo")}</h3>
-					<p>{t("security.writeup2Desc")}</p>
-					<div class="writeup-tags">
-						<span class="tech-tag">Squid</span>
-						<span class="tech-tag">Mikrotik</span>
-						<span class="tech-tag">iptables</span>
-						<span class="tech-tag">Wazuh</span>
+					<div class="writeup-body">
+						<h3>{t("security.writeup2Titulo")}</h3>
+						<p>{t("security.writeup2Desc")}</p>
+						<div class="writeup-tags">
+							<span class="tech-tag">Squid</span>
+							<span class="tech-tag">Mikrotik</span>
+							<span class="tech-tag">iptables</span>
+							<span class="tech-tag">Wazuh</span>
+						</div>
+						<span class="writeup-link btn btn-ghost btn-sm" data-spotlight>
+							<span class="btn-spotlight" aria-hidden="true"></span>
+							<span class="btn-content">
+								{t("security.leerWriteup")}
+								<i
+									class="fa-solid fa-arrow-up-right-from-square btn-icon"
+									aria-hidden="true"
+								/>
+							</span>
+						</span>
 					</div>
-					<span class="writeup-link">{t("security.leerWriteup")} ↗</span>
 				</a>
 			</div>
 			<a
-				class="mas-writeups"
+				class="mas-writeups btn btn-ghost btn-sm"
 				href="https://github.com/devSammyO/writeups"
 				target="_blank"
 				rel="noopener noreferrer"
+				data-spotlight
 			>
-				{t("security.masWriteups")} ↗
+				<span class="btn-spotlight" aria-hidden="true"></span>
+				<span class="btn-content">
+					{t("security.masWriteups")}
+					<i
+						class="fa-solid fa-arrow-up-right-from-square btn-icon"
+						aria-hidden="true"
+					/>
+				</span>
 			</a>
 		</div>
 	</div>
 </section>
 
 <style>
+	.seguridad-section {
+		position: relative;
+		overflow: hidden;
+	}
+
+	.seguridad-section::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background-image: linear-gradient(
+				rgba(26, 188, 156, 0.07) 1px,
+				transparent 1px
+			),
+			linear-gradient(90deg, rgba(26, 188, 156, 0.07) 1px, transparent 1px);
+		background-size: 44px 44px;
+		mask-image: radial-gradient(circle at 50% 0%, black, transparent 70%);
+		-webkit-mask-image: radial-gradient(
+			circle at 50% 0%,
+			black,
+			transparent 70%
+		);
+		pointer-events: none;
+	}
+
+	.seguridad-seccion {
+		position: relative;
+		z-index: 1;
+	}
+
 	.seguridad-titulos {
 		display: flex;
 		flex-direction: column;
-		gap: 6px;
-	}
-
-	.seguridad-titulos h5 {
-		color: var(--text-muted);
+		align-items: center;
+		gap: 16px;
 	}
 
 	.seguridad-subtitulo {
@@ -171,24 +284,13 @@ const platforms = [
 		max-width: 600px;
 	}
 
-	/* ===== Skills ===== */
-	.skills-columnas {
-		display: flex;
-		flex-direction: column;
-		gap: 30px;
+	/* ===== Arsenal (skills) ===== */
+	.arsenal {
 		width: 100%;
 	}
 
-	.skills-columna {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 16px;
-	}
-
-	.skills-columna h6 {
-		color: var(--text);
-		font-size: 15px;
+	.arsenal-body {
+		padding: 24px;
 	}
 
 	/* ===== Plataformas ===== */
@@ -209,21 +311,46 @@ const platforms = [
 		grid-template-columns: 1fr;
 		gap: 16px;
 		width: 100%;
-		max-width: 480px;
+		max-width: 560px;
 	}
 
 	.plataforma-card {
+		position: relative;
 		display: flex;
 		align-items: center;
-		gap: 16px;
-		padding: 18px 20px;
+		gap: 18px;
+		padding: 20px 22px;
 		background: var(--bg-elevated);
 		border: 1px solid var(--border);
-		border-radius: 14px;
+		border-radius: 16px;
 		box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.35);
 		text-align: left;
+		overflow: hidden;
 		transition: transform 0.3s ease, box-shadow 0.3s ease,
 			border-color 0.3s ease;
+	}
+
+	.plataforma-card .btn-spotlight {
+		background: radial-gradient(
+			200px circle at var(--x, 50%) var(--y, 50%),
+			var(--accent-soft),
+			transparent 70%
+		);
+	}
+
+	.plataforma-card::before {
+		content: "";
+		position: absolute;
+		top: -40px;
+		right: -40px;
+		width: 120px;
+		height: 120px;
+		background: radial-gradient(
+			circle,
+			rgba(26, 188, 156, 0.16),
+			transparent 70%
+		);
+		pointer-events: none;
 	}
 
 	.plataforma-card:hover {
@@ -232,24 +359,52 @@ const platforms = [
 		box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.5);
 	}
 
-	.plataforma-card i {
-		font-size: 26px;
-		color: var(--accent);
+	.plataforma-icono {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 50px;
+		height: 50px;
 		flex-shrink: 0;
-		width: 30px;
-		text-align: center;
+		border-radius: 14px;
+		background: var(--accent-soft);
+		color: var(--accent);
+		font-size: 22px;
 	}
 
-	.plataforma-card h6 {
+	.plataforma-info {
+		position: relative;
+		z-index: 1;
+		flex: 1;
+		min-width: 0;
+	}
+
+	.plataforma-info h6 {
 		margin: 0;
 		color: var(--text);
 		font-size: 15px;
 	}
 
-	.plataforma-card p {
-		margin: 0;
-		color: var(--text-muted);
-		font-size: 13px;
+	.plataforma-info p {
+		margin: 4px 0 0;
+		color: var(--text-dim);
+		font-family: var(--font-mono);
+		font-size: 12px;
+	}
+
+	.plataforma-arrow {
+		position: relative;
+		z-index: 1;
+		color: var(--text-dim);
+		font-size: 14px;
+		transition: color 0.25s ease, transform 0.25s ease;
+	}
+
+	.plataforma-card:hover .plataforma-arrow {
+		color: var(--accent);
+		transform: translate(2px, -2px);
 	}
 
 	/* ===== Writeups ===== */
@@ -275,11 +430,10 @@ const platforms = [
 	.writeup-card {
 		display: flex;
 		flex-direction: column;
-		gap: 14px;
 		text-align: left;
-		padding: 24px;
 		background: var(--bg-elevated);
 		border-radius: 16px;
+		overflow: hidden;
 		border: 1px solid var(--border);
 		box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.35);
 		transition: transform 0.3s ease, box-shadow 0.3s ease,
@@ -292,23 +446,15 @@ const platforms = [
 		box-shadow: 0px 16px 40px rgba(0, 0, 0, 0.5);
 	}
 
-	.writeup-header {
-		display: flex;
-		align-items: center;
-		gap: 10px;
-	}
-
-	.writeup-header i {
-		font-size: 18px;
+	.writeup-card .term-bar-title i {
 		color: var(--accent);
 	}
 
-	.writeup-plataforma {
-		color: var(--text-dim);
-		font-size: 13px;
-		font-weight: 600;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
+	.writeup-body {
+		display: flex;
+		flex-direction: column;
+		gap: 14px;
+		padding: 22px 24px;
 	}
 
 	.writeup-card h3 {
@@ -327,35 +473,8 @@ const platforms = [
 		gap: 8px;
 	}
 
-	.tech-tag {
-		background: var(--accent-soft);
-		color: var(--accent);
-		font-size: 12px;
-		font-weight: bold;
-		padding: 4px 10px;
-		border-radius: 20px;
-	}
-
 	.writeup-link {
-		color: var(--accent);
-		font-size: 14px;
-		font-weight: bold;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-	}
-
-	.mas-writeups {
-		color: var(--text-muted);
-		font-size: 14px;
-		font-weight: 600;
-		border-bottom: 1px solid var(--border-strong);
-		padding-bottom: 2px;
-		transition: color 0.25s ease, border-color 0.25s ease;
-	}
-
-	.mas-writeups:hover {
-		color: var(--accent);
-		border-color: var(--accent);
+		align-self: flex-start;
 	}
 
 	@media screen and (min-width: 700px) {
@@ -365,12 +484,6 @@ const platforms = [
 	}
 
 	@media screen and (min-width: 988px) {
-		.skills-columnas {
-			flex-direction: row;
-			justify-content: center;
-			gap: 60px;
-		}
-
 		.writeups-grid {
 			grid-template-columns: repeat(2, 1fr);
 		}
