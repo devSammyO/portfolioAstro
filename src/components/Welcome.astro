@@ -238,6 +238,7 @@ const t = useTranslations(lang);
 	/* ===== Hero ===== */
 	.hero-bg {
 		position: relative;
+		z-index: 0;
 		overflow: hidden;
 		background: linear-gradient(160deg, #0d1117 0%, #000000 100%);
 	}
@@ -265,6 +266,7 @@ const t = useTranslations(lang);
 		height: 100%;
 		display: block;
 		pointer-events: none;
+		z-index: 0;
 	}
 
 	.contenedor {
@@ -312,10 +314,13 @@ const t = useTranslations(lang);
 	}
 
 	.foto {
+		position: relative;
+		z-index: 1;
 		width: 150px;
 		aspect-ratio: 1 / 1;
 		object-fit: cover;
 		border-radius: 50%;
+		background: var(--bg-alt);
 		border: 3px solid var(--accent);
 		box-shadow: 0 0 0 6px rgba(26, 188, 156, 0.12),
 			0px 20px 40px rgba(0, 0, 0, 0.5);
