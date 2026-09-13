@@ -103,13 +103,17 @@ const skillGroups = [
 </section>
 <section class="section-pad section-alt about-section" id="sobre-mi">
 	<div class="sobre-mi-seccion section-container">
-		<div class="sobre-mi-titulos reveal">
-			<span class="section-tag">
-				<span class="section-tag-path">~/sobre-mi</span>
-				<span class="section-tag-dot" aria-hidden="true"></span>
-				{t("about.aprende")}
-			</span>
-			<h2 class="section-title" data-scramble>{t("about.aboutMe")}</h2>
+		<div class="sobre-mi-titulos section-head reveal">
+			<span class="section-head-index" aria-hidden="true">01</span>
+			<div class="section-head-main">
+				<span class="section-tag">
+					<span class="section-tag-path">~/sobre-mi</span>
+					<span class="section-tag-dot" aria-hidden="true"></span>
+					{t("about.aprende")}
+				</span>
+				<h2 class="section-title" data-scramble>{t("about.aboutMe")}</h2>
+			</div>
+			<p class="section-head-desc">{t("about.subtitulo")}</p>
 		</div>
 		<div class="about-grid reveal">
 			<div class="about-terminal term-window">
@@ -168,13 +172,17 @@ const skillGroups = [
 <Security />
 <section class="section-pad section-alt" id="proyectos">
 	<div class="proyectos-seccion section-container">
-		<div class="proyectos-titulos reveal">
-			<span class="section-tag">
-				<span class="section-tag-path">~/proyectos</span>
-				<span class="section-tag-dot" aria-hidden="true"></span>
-				{t("projects.eyebrow")}
-			</span>
-			<h2 class="section-title" data-scramble>{t("projects.proyectos")}</h2>
+		<div class="proyectos-titulos section-head reveal">
+			<span class="section-head-index" aria-hidden="true">03</span>
+			<div class="section-head-main">
+				<span class="section-tag">
+					<span class="section-tag-path">~/proyectos</span>
+					<span class="section-tag-dot" aria-hidden="true"></span>
+					{t("projects.eyebrow")}
+				</span>
+				<h2 class="section-title" data-scramble>{t("projects.proyectos")}</h2>
+			</div>
+			<p class="section-head-desc">{t("projects.subtitulo")}</p>
 		</div>
 		<div class="proyectos-grid reveal">
 			<div class="proyecto-card">
@@ -205,6 +213,15 @@ const skillGroups = [
 				<div class="proyecto-info">
 					<h3>Padel Ges</h3>
 					<p>{t("projects.parrafo1")}</p>
+					<div class="proyecto-demo">
+						<span class="proyecto-demo-label">
+							<i class="fa-solid fa-key" aria-hidden="true" />
+							{t("projects.demoLabel")}
+						</span>
+						<code class="proyecto-demo-cred">demo@example.com</code>
+						<code class="proyecto-demo-cred">password</code>
+					</div>
+					<p class="proyecto-demo-nota">{t("projects.padelDemoNota")}</p>
 					<div class="proyecto-tags">
 						<span class="tech-tag">Laravel</span>
 						<span class="tech-tag">PHP</span>
@@ -293,20 +310,24 @@ const skillGroups = [
 </section>
 <section class="section-pad" id="contacto">
 	<div class="contacto-seccion section-container">
-		<div class="contacto-titulos reveal">
-			<span class="section-tag">
-				<span class="section-tag-path">~/contacto</span>
-				<span class="section-tag-dot" aria-hidden="true"></span>
-				{t("contacto.eyebrow")}
-			</span>
-			<h2 class="section-title" data-scramble>{t("contacto.contacta")}</h2>
-			<h5 class="contacto-idiomas">
-				<span>{t("contacto.hablo")}</span>
-				<span class="contacto-banderas">
-					<img src="/images/spain.png" alt="España" width="24px" />
-					<img src="/images/united-kingdom.png" alt="uk" width="24px" />
+		<div class="contacto-titulos section-head reveal">
+			<span class="section-head-index" aria-hidden="true">04</span>
+			<div class="section-head-main">
+				<span class="section-tag">
+					<span class="section-tag-path">~/contacto</span>
+					<span class="section-tag-dot" aria-hidden="true"></span>
+					{t("contacto.eyebrow")}
 				</span>
-			</h5>
+				<h2 class="section-title" data-scramble>{t("contacto.contacta")}</h2>
+				<h5 class="contacto-idiomas">
+					<span>{t("contacto.hablo")}</span>
+					<span class="contacto-banderas">
+						<img src="/images/spain.png" alt="España" width="24px" />
+						<img src="/images/united-kingdom.png" alt="uk" width="24px" />
+					</span>
+				</h5>
+			</div>
+			<p class="section-head-desc">{t("contacto.subtitulo")}</p>
 		</div>
 		<div class="contacto-grid reveal">
 			<a
@@ -579,13 +600,6 @@ const skillGroups = [
 		pointer-events: none;
 	}
 
-	.sobre-mi-titulos {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 16px;
-	}
-
 	.about-grid {
 		position: relative;
 		z-index: 1;
@@ -703,13 +717,6 @@ const skillGroups = [
 	}
 
 	/* ===== Proyectos ===== */
-	.proyectos-titulos {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 16px;
-	}
-
 	.proyectos-grid {
 		display: grid;
 		grid-template-columns: 1fr;
@@ -783,6 +790,42 @@ const skillGroups = [
 		font-size: 14px;
 	}
 
+	.proyecto-demo {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 8px;
+		margin-top: 14px;
+	}
+
+	.proyecto-demo-label {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		font-family: var(--font-mono);
+		font-size: 11px;
+		font-weight: 600;
+		color: var(--accent);
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+	}
+
+	.proyecto-demo-cred {
+		font-family: var(--font-mono);
+		font-size: 12px;
+		background: var(--bg);
+		border: 1px solid var(--border);
+		padding: 3px 8px;
+		border-radius: 6px;
+		color: var(--text);
+	}
+
+	.proyecto-info .proyecto-demo-nota {
+		margin-top: 6px;
+		color: var(--text-dim);
+		font-size: 12px;
+	}
+
 	.proyecto-tags {
 		margin-top: 15px;
 		display: flex;
@@ -791,13 +834,6 @@ const skillGroups = [
 	}
 
 	/* ===== Contacto ===== */
-	.contacto-titulos {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 16px;
-	}
-
 	.contacto-titulos h5 {
 		color: var(--text-muted);
 	}

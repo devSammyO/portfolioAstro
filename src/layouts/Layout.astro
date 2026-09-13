@@ -509,14 +509,62 @@ const t = useTranslations(lang);
 		line-height: 1.15;
 	}
 
-	.section-title::after {
-		content: "";
-		display: block;
-		width: 52px;
-		height: 4px;
-		margin: 16px auto 0;
-		border-radius: 4px;
-		background: linear-gradient(90deg, var(--accent), transparent);
+	/* ===== Cabecera de sección (eyebrow + título + índice + descripción) ===== */
+	.section-head {
+		position: relative;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		text-align: left;
+		gap: 18px;
+	}
+
+	.section-head-index {
+		position: absolute;
+		top: -0.5em;
+		right: 0;
+		z-index: 0;
+		font-family: var(--font-mono);
+		font-weight: 700;
+		font-size: clamp(46px, 9vw, 88px);
+		line-height: 1;
+		color: var(--text);
+		opacity: 0.05;
+		pointer-events: none;
+		user-select: none;
+	}
+
+	.section-head-main {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+
+	.section-head-desc {
+		position: relative;
+		z-index: 1;
+		margin: 0;
+		max-width: 480px;
+		color: var(--text-muted);
+		font-size: 15px;
+		line-height: 1.7;
+	}
+
+	@media screen and (min-width: 900px) {
+		.section-head {
+			flex-direction: row;
+			align-items: flex-end;
+			justify-content: space-between;
+			gap: 40px;
+		}
+
+		.section-head-desc {
+			padding-bottom: 6px;
+			text-align: left;
+		}
 	}
 
 	/* ===== Pills de habilidades compartidas ===== */

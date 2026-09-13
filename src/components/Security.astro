@@ -115,14 +115,17 @@ const platforms = [
 
 <section class="section-pad section-alt seguridad-section" id="seguridad">
 	<div class="seguridad-seccion section-container">
-		<div class="seguridad-titulos reveal">
-			<span class="section-tag">
-				<span class="section-tag-path">~/seguridad</span>
-				<span class="section-tag-dot" aria-hidden="true"></span>
-				{t("security.eyebrow")}
-			</span>
-			<h2 class="section-title" data-scramble>{t("security.titulo")}</h2>
-			<p class="seguridad-subtitulo">{t("security.subtitulo")}</p>
+		<div class="seguridad-titulos section-head reveal">
+			<span class="section-head-index" aria-hidden="true">02</span>
+			<div class="section-head-main">
+				<span class="section-tag">
+					<span class="section-tag-path">~/seguridad</span>
+					<span class="section-tag-dot" aria-hidden="true"></span>
+					{t("security.eyebrow")}
+				</span>
+				<h2 class="section-title" data-scramble>{t("security.titulo")}</h2>
+			</div>
+			<p class="section-head-desc">{t("security.subtitulo")}</p>
 		</div>
 
 		<div class="arsenal term-window reveal">
@@ -295,18 +298,6 @@ const platforms = [
 	.seguridad-seccion {
 		position: relative;
 		z-index: 1;
-	}
-
-	.seguridad-titulos {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 16px;
-	}
-
-	.seguridad-subtitulo {
-		color: var(--text-muted);
-		max-width: 600px;
 	}
 
 	/* ===== Arsenal (skills) ===== */
