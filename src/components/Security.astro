@@ -21,16 +21,7 @@ const arsenalGroups = [
 	{
 		icon: "fa-solid fa-toolbox",
 		title: t("security.catHerramientasTitulo"),
-		items: [
-			"Wazuh",
-			"Suricata",
-			"Nmap",
-			"Metasploit",
-			"Burp Suite",
-			"Caido",
-			"Wireshark",
-			"Autopsy",
-		],
+		items: ["Suricata", "Caido", "Wireshark", "Autopsy"],
 	},
 	{
 		icon: "fa-solid fa-shield-halved",
@@ -51,12 +42,58 @@ const arsenalGroups = [
 			t("security.catRedes1"),
 			"VPN",
 			t("security.catRedes2"),
-			"Mikrotik",
 			"pfSense",
 			"PKI",
 			"WSUS",
-			t("security.catRedes3"),
 		],
+	},
+];
+
+const writeups = [
+	{
+		href: "https://github.com/devSammyO/writeups/tree/main/thehackerslabs/pa-que-aiga-lujo",
+		sourceIcon: "fa-brands fa-github",
+		sourceLabel: t("security.writeup1Plataforma"),
+		titulo: t("security.writeup1Titulo"),
+		desc: t("security.writeup1Desc"),
+		image: "/images/writeups/pa-que-aiga-lujo.png",
+		tags: ["Nmap", "Hydra", "Metasploit", "Ligolo-ng"],
+	},
+	{
+		href: "/writeups/vpn-wireguard-mikrotik.pdf",
+		sourceIcon: "fa-solid fa-file-pdf",
+		sourceLabel: t("security.writeup3Plataforma"),
+		titulo: t("security.writeup3Titulo"),
+		desc: t("security.writeup3Desc"),
+		image: "/images/writeups/vpn-wireguard-mikrotik.png",
+		tags: ["WireGuard", "MikroTik", "VLAN", "GNS3"],
+	},
+	{
+		href: "/writeups/proxy-transparente-squid-wazuh.pdf",
+		sourceIcon: "fa-solid fa-file-pdf",
+		sourceLabel: t("security.writeup2Plataforma"),
+		titulo: t("security.writeup2Titulo"),
+		desc: t("security.writeup2Desc"),
+		image: "/images/writeups/proxy-squid-wazuh.png",
+		tags: ["Squid", "MikroTik", "iptables", "Wazuh"],
+	},
+	{
+		href: "/writeups/sqlmap-thm-blind-sqli.pdf",
+		sourceIcon: "fa-solid fa-file-pdf",
+		sourceLabel: t("security.writeup4Plataforma"),
+		titulo: t("security.writeup4Titulo"),
+		desc: t("security.writeup4Desc"),
+		image: "/images/writeups/sqlmap-thm.png",
+		tags: ["SQLMap", "Nmap", "MySQL", "GTFOBins"],
+	},
+	{
+		href: "/writeups/idor-path-traversal.pdf",
+		sourceIcon: "fa-solid fa-file-pdf",
+		sourceLabel: t("security.writeup5Plataforma"),
+		titulo: t("security.writeup5Titulo"),
+		desc: t("security.writeup5Desc"),
+		image: "/images/writeups/idor-path-traversal.png",
+		tags: ["IDOR", "Path Traversal", "Burp Suite"],
 	},
 ];
 
@@ -98,26 +135,36 @@ const platforms = [
 			<div class="arsenal-body skills-matrix">
 				{
 					arsenalGroups.map((group) => (
-						<div class="skills-panel">
-							<div class="skills-panel-head">
+						<details class="skills-panel">
+							<summary class="skills-panel-head">
 								<span class="skills-panel-icon">
 									<i class={group.icon} />
 								</span>
 								<h6>{group.title}</h6>
-							</div>
+								<span class="skills-panel-count">{group.items.length}</span>
+								<i
+									class="fa-solid fa-chevron-down skills-panel-caret"
+									aria-hidden="true"
+								/>
+							</summary>
 							<div class="skills">
 								{group.items.map((item) => (
 									<span class="skill-pill">{item}</span>
 								))}
 							</div>
-						</div>
+						</details>
 					))
 				}
 			</div>
 		</div>
 
 		<div class="plataformas-bloque reveal">
-			<h5>{t("security.plataformasTitulo")}</h5>
+			<h5 class="term-label">
+				<span class="term-label-prompt">$</span>
+				<span class="term-label-cmd">ls</span>
+				<span class="term-label-path">~/plataformas</span>
+				<span class="term-label-cursor" aria-hidden="true"></span>
+			</h5>
 			<div class="plataformas-grid">
 				{
 					platforms.map((p) => (
@@ -147,80 +194,58 @@ const platforms = [
 		</div>
 
 		<div class="writeups-bloque reveal">
-			<h5>{t("security.writeupsTitulo")}</h5>
+			<h5 class="term-label">
+				<span class="term-label-prompt">$</span>
+				<span class="term-label-cmd">ls</span>
+				<span class="term-label-path">~/writeups</span>
+				<span class="term-label-cursor" aria-hidden="true"></span>
+			</h5>
 			<div class="writeups-grid">
-				<a
-					class="writeup-card"
-					href="https://github.com/devSammyO/writeups/tree/main/thehackerslabs/pa-que-aiga-lujo"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<div class="term-bar">
-						<span class="term-dot term-dot-red"></span>
-						<span class="term-dot term-dot-yellow"></span>
-						<span class="term-dot term-dot-green"></span>
-						<span class="term-bar-title">
-							<i class="fa-brands fa-github" />
-							{t("security.writeup1Plataforma")}
-						</span>
-					</div>
-					<div class="writeup-body">
-						<h3>{t("security.writeup1Titulo")}</h3>
-						<p>{t("security.writeup1Desc")}</p>
-						<div class="writeup-tags">
-							<span class="tech-tag">Nmap</span>
-							<span class="tech-tag">Hydra</span>
-							<span class="tech-tag">Metasploit</span>
-							<span class="tech-tag">Ligolo-ng</span>
-						</div>
-						<span class="writeup-link btn btn-ghost btn-sm" data-spotlight>
-							<span class="btn-spotlight" aria-hidden="true"></span>
-							<span class="btn-content">
-								{t("security.leerWriteup")}
-								<i
-									class="fa-solid fa-arrow-up-right-from-square btn-icon"
-									aria-hidden="true"
+				{
+					writeups.map((w) => (
+						<a
+							class="writeup-card"
+							href={w.href}
+							target="_blank"
+							rel="noopener noreferrer"
+							data-spotlight
+						>
+							<span class="btn-spotlight" aria-hidden="true" />
+							<div class="writeup-media">
+								<img
+									class="writeup-imagen"
+									src={w.image}
+									alt={w.titulo}
+									loading="lazy"
+									onerror="this.remove()"
 								/>
-							</span>
-						</span>
-					</div>
-				</a>
-				<a
-					class="writeup-card"
-					href="/writeups/proxy-transparente-squid-wazuh.pdf"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<div class="term-bar">
-						<span class="term-dot term-dot-red"></span>
-						<span class="term-dot term-dot-yellow"></span>
-						<span class="term-dot term-dot-green"></span>
-						<span class="term-bar-title">
-							<i class="fa-solid fa-file-pdf" />
-							{t("security.writeup2Plataforma")}
-						</span>
-					</div>
-					<div class="writeup-body">
-						<h3>{t("security.writeup2Titulo")}</h3>
-						<p>{t("security.writeup2Desc")}</p>
-						<div class="writeup-tags">
-							<span class="tech-tag">Squid</span>
-							<span class="tech-tag">Mikrotik</span>
-							<span class="tech-tag">iptables</span>
-							<span class="tech-tag">Wazuh</span>
-						</div>
-						<span class="writeup-link btn btn-ghost btn-sm" data-spotlight>
-							<span class="btn-spotlight" aria-hidden="true"></span>
-							<span class="btn-content">
-								{t("security.leerWriteup")}
-								<i
-									class="fa-solid fa-arrow-up-right-from-square btn-icon"
-									aria-hidden="true"
-								/>
-							</span>
-						</span>
-					</div>
-				</a>
+								<span class="writeup-tags-float">
+									{w.tags.map((tag) => (
+										<span class="tag-float">{tag}</span>
+									))}
+								</span>
+								<span class="writeup-scrim" aria-hidden="true" />
+								<div class="writeup-overlay-info">
+									<span class="writeup-fuente">
+										<i class={w.sourceIcon} />
+										{w.sourceLabel}
+									</span>
+									<h3>{w.titulo}</h3>
+								</div>
+							</div>
+							<div class="writeup-footer">
+								<p>{w.desc}</p>
+								<span class="writeup-link-inline">
+									{t("security.leerWriteup")}
+									<i
+										class="fa-solid fa-arrow-up-right-from-square"
+										aria-hidden="true"
+									/>
+								</span>
+							</div>
+						</a>
+					))
+				}
 			</div>
 			<a
 				class="mas-writeups btn btn-ghost btn-sm"
@@ -302,9 +327,6 @@ const platforms = [
 		width: 100%;
 	}
 
-	.plataformas-bloque h5 {
-		color: var(--text-muted);
-	}
 
 	.plataformas-grid {
 		display: grid;
@@ -416,9 +438,6 @@ const platforms = [
 		width: 100%;
 	}
 
-	.writeups-bloque h5 {
-		color: var(--text-muted);
-	}
 
 	.writeups-grid {
 		display: grid;
@@ -428,6 +447,7 @@ const platforms = [
 	}
 
 	.writeup-card {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		text-align: left;
@@ -440,41 +460,174 @@ const platforms = [
 			border-color 0.3s ease;
 	}
 
+	.writeup-card .btn-spotlight {
+		background: radial-gradient(
+			220px circle at var(--x, 50%) var(--y, 50%),
+			var(--accent-soft),
+			transparent 70%
+		);
+	}
+
 	.writeup-card:hover {
 		transform: translateY(-6px);
 		border-color: var(--accent);
 		box-shadow: 0px 16px 40px rgba(0, 0, 0, 0.5);
 	}
 
-	.writeup-card .term-bar-title i {
-		color: var(--accent);
+	.writeup-media {
+		position: relative;
+		aspect-ratio: 16 / 10;
+		overflow: hidden;
+		background: repeating-linear-gradient(
+				135deg,
+				rgba(26, 188, 156, 0.08) 0px,
+				rgba(26, 188, 156, 0.08) 2px,
+				transparent 2px,
+				transparent 14px
+			),
+			var(--bg-elevated);
 	}
 
-	.writeup-body {
-		display: flex;
-		flex-direction: column;
-		gap: 14px;
-		padding: 22px 24px;
+	.writeup-imagen {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.5s ease;
 	}
 
-	.writeup-card h3 {
-		color: var(--text);
+	.writeup-card:hover .writeup-imagen {
+		transform: scale(1.06);
 	}
 
-	.writeup-card p {
-		color: var(--text-muted);
-		font-size: 14px;
-		line-height: 1.6;
+	.writeup-scrim {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(
+			to top,
+			rgba(10, 14, 17, 0.92) 0%,
+			rgba(10, 14, 17, 0.5) 40%,
+			transparent 68%
+		);
+		pointer-events: none;
 	}
 
-	.writeup-tags {
+	.writeup-tags-float {
+		position: absolute;
+		z-index: 2;
+		top: 14px;
+		left: 14px;
+		right: 14px;
 		display: flex;
 		flex-wrap: wrap;
 		gap: 8px;
+		pointer-events: none;
 	}
 
-	.writeup-link {
+	.tag-float {
+		font-family: var(--font-mono);
+		font-size: 11px;
+		letter-spacing: 0.02em;
+		color: var(--accent);
+		background: rgba(10, 14, 17, 0.65);
+		border: 1px solid rgba(26, 188, 156, 0.4);
+		padding: 5px 10px;
+		border-radius: 999px;
+		backdrop-filter: blur(6px);
+		-webkit-backdrop-filter: blur(6px);
+		box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.35);
+		animation: tagFloat 3.6s ease-in-out infinite;
+	}
+
+	.tag-float:nth-child(2) {
+		animation-delay: 0.3s;
+	}
+	.tag-float:nth-child(3) {
+		animation-delay: 0.6s;
+	}
+	.tag-float:nth-child(4) {
+		animation-delay: 0.9s;
+	}
+
+	@keyframes tagFloat {
+		0%,
+		100% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(-4px);
+		}
+	}
+
+	.writeup-overlay-info {
+		position: absolute;
+		z-index: 2;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		padding: 18px 20px;
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+	}
+
+	.writeup-fuente {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		font-family: var(--font-mono);
+		font-size: 11px;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		color: var(--accent);
+	}
+
+	.writeup-overlay-info h3 {
+		margin: 0;
+		color: #fff;
+		font-size: 17px;
+	}
+
+	.writeup-footer {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		padding: 18px 20px 20px;
+	}
+
+	.writeup-footer p {
+		margin: 0;
+		color: var(--text-muted);
+		font-size: 13px;
+		line-height: 1.6;
+	}
+
+	.writeup-link-inline {
 		align-self: flex-start;
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		font-family: var(--font-mono);
+		font-size: 12px;
+		color: var(--text);
+		border: 1px solid var(--border);
+		padding: 8px 14px;
+		border-radius: 999px;
+		transition: border-color 0.25s ease, color 0.25s ease;
+	}
+
+	.writeup-card:hover .writeup-link-inline {
+		border-color: var(--accent);
+		color: var(--accent);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.tag-float {
+			animation: none;
+		}
 	}
 
 	@media screen and (min-width: 700px) {
@@ -486,6 +639,12 @@ const platforms = [
 	@media screen and (min-width: 988px) {
 		.writeups-grid {
 			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media screen and (min-width: 1280px) {
+		.writeups-grid {
+			grid-template-columns: repeat(3, 1fr);
 		}
 	}
 </style>

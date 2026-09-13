@@ -22,14 +22,7 @@ const skillGroups = [
 	{
 		icon: "fa-solid fa-code",
 		title: t("projects.catBackendTitulo"),
-		items: [
-			"PHP",
-			"Java",
-			"JavaFX",
-			"Laravel",
-			"Bash",
-			"Firebase",
-		],
+		items: ["Java", "JavaFX", "Bash", "Firebase"],
 	},
 	{
 		icon: "fa-solid fa-laptop-code",
@@ -38,11 +31,8 @@ const skillGroups = [
 			"HTML",
 			"CSS",
 			"JavaScript",
-			"TypeScript",
-			"Astro",
 			"jQuery",
 			"Bootstrap",
-			"Tailwind CSS",
 			"SASS",
 			"Vue.js",
 		],
@@ -50,7 +40,7 @@ const skillGroups = [
 	{
 		icon: "fa-solid fa-database",
 		title: t("projects.catDatosTitulo"),
-		items: ["MySQL", "MongoDB", "Docker", "Git", "GitHub"],
+		items: ["MongoDB", "Docker", "Git", "GitHub"],
 	},
 ];
 ---
@@ -260,25 +250,43 @@ const skillGroups = [
 			</div>
 		</div>
 		<div class="skills-bloque reveal">
-			<h5>{t("projects.habilidades")}</h5>
-			<div class="skills-matrix">
-				{
-					skillGroups.map((group) => (
-						<div class="skills-panel">
-							<div class="skills-panel-head">
-								<span class="skills-panel-icon">
-									<i class={group.icon} />
-								</span>
-								<h6>{group.title}</h6>
-							</div>
-							<div class="skills">
-								{group.items.map((item) => (
-									<span class="skill-pill">{item}</span>
-								))}
-							</div>
-						</div>
-					))
-				}
+			<h5 class="term-label">
+				<span class="term-label-prompt">$</span>
+				<span class="term-label-cmd">ls</span>
+				<span class="term-label-path">~/habilidades</span>
+				<span class="term-label-cursor" aria-hidden="true"></span>
+			</h5>
+			<div class="habilidades term-window">
+				<div class="term-bar">
+					<span class="term-dot term-dot-red"></span>
+					<span class="term-dot term-dot-yellow"></span>
+					<span class="term-dot term-dot-green"></span>
+					<span class="term-bar-title">sammy@dev: ~/habilidades</span>
+				</div>
+				<div class="habilidades-body skills-matrix">
+					{
+						skillGroups.map((group) => (
+							<details class="skills-panel">
+								<summary class="skills-panel-head">
+									<span class="skills-panel-icon">
+										<i class={group.icon} />
+									</span>
+									<h6>{group.title}</h6>
+									<span class="skills-panel-count">{group.items.length}</span>
+									<i
+										class="fa-solid fa-chevron-down skills-panel-caret"
+										aria-hidden="true"
+									/>
+								</summary>
+								<div class="skills">
+									{group.items.map((item) => (
+										<span class="skill-pill">{item}</span>
+									))}
+								</div>
+							</details>
+						))
+					}
+				</div>
 			</div>
 		</div>
 	</div>
@@ -363,6 +371,15 @@ const skillGroups = [
 	.material-symbols-outlined {
 		color: var(--text);
 		font-size: 30px;
+	}
+
+	/* ===== Habilidades (terminal window, igual que el Arsenal) ===== */
+	.habilidades {
+		width: 100%;
+	}
+
+	.habilidades-body {
+		padding: 24px;
 	}
 
 	/* ===== Hero ===== */

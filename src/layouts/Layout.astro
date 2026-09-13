@@ -525,10 +525,50 @@ const t = useTranslations(lang);
 		flex-direction: column;
 		align-items: center;
 		gap: 20px;
+		width: 100%;
 	}
 
-	.skills-bloque h5 {
+	/* ===== Etiqueta de sub-bloque estilo terminal (reutilizable) ===== */
+	.term-label {
+		display: inline-flex;
+		align-items: baseline;
+		gap: 8px;
+		font-family: var(--font-mono);
+		font-size: 15px;
+		font-weight: 600;
+	}
+
+	.term-label-prompt {
+		color: var(--accent);
+	}
+
+	.term-label-cmd {
 		color: var(--text-muted);
+	}
+
+	.term-label-path {
+		color: var(--text);
+	}
+
+	.term-label-cursor {
+		display: inline-block;
+		width: 7px;
+		height: 15px;
+		background: var(--accent);
+		vertical-align: middle;
+		animation: term-label-blink 1s steps(1) infinite;
+	}
+
+	@keyframes term-label-blink {
+		50% {
+			opacity: 0;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.term-label-cursor {
+			animation: none;
+		}
 	}
 
 	.skills {
@@ -576,7 +616,6 @@ const t = useTranslations(lang);
 	}
 
 	.skills-panel {
-		padding: 20px;
 		border: 1px solid var(--border);
 		border-radius: 14px;
 		background: rgba(255, 255, 255, 0.02);
@@ -586,27 +625,35 @@ const t = useTranslations(lang);
 
 	.skills-panel:hover {
 		border-color: var(--accent);
-		transform: translateY(-3px);
 	}
 
 	.skills-panel-head {
 		display: flex;
 		align-items: center;
 		gap: 12px;
-		margin-bottom: 16px;
+		padding: 16px 18px;
+	}
+
+	summary.skills-panel-head {
+		cursor: pointer;
+		list-style: none;
+	}
+
+	summary.skills-panel-head::-webkit-details-marker {
+		display: none;
 	}
 
 	.skills-panel-icon {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 38px;
-		height: 38px;
+		width: 34px;
+		height: 34px;
 		flex-shrink: 0;
 		border-radius: 10px;
 		background: var(--accent-soft);
 		color: var(--accent);
-		font-size: 16px;
+		font-size: 14px;
 	}
 
 	.skills-panel-head h6 {
@@ -615,8 +662,30 @@ const t = useTranslations(lang);
 		font-size: 15px;
 	}
 
+	.skills-panel-count {
+		color: var(--text-dim);
+		font-family: var(--font-mono);
+		font-size: 12px;
+	}
+
+	.skills-panel-caret {
+		margin-left: auto;
+		color: var(--text-dim);
+		font-size: 13px;
+		transition: transform 0.25s ease;
+	}
+
+	.skills-panel[open] .skills-panel-caret {
+		transform: rotate(180deg);
+	}
+
+	.skills-panel[open] {
+		border-color: var(--accent);
+	}
+
 	.skills-panel .skills {
 		justify-content: flex-start;
+		padding: 0 18px 18px;
 	}
 
 	@media screen and (min-width: 700px) {
@@ -898,6 +967,12 @@ const t = useTranslations(lang);
 
 	.site-header.is-hidden {
 		transform: translateY(-140%);
+	}
+
+	@media screen and (min-width: 900px) {
+		.site-header.is-hidden {
+			transform: none;
+		}
 	}
 
 	.nav-container {
