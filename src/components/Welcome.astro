@@ -10,37 +10,47 @@ const skillGroups = [
 		icon: "fa-solid fa-server",
 		title: t("projects.catSistemasTitulo"),
 		items: [
-			"Windows Server",
-			"Windows",
-			"Linux",
-			t("projects.catSistemas1"),
-			t("projects.catSistemas2"),
-			t("projects.catSistemas3"),
-			"Microsoft Office",
+			{ name: "Windows Server", icon: "fa-brands fa-windows" },
+			{ name: "Windows", icon: "fa-brands fa-windows" },
+			{ name: "Linux", icon: "fa-brands fa-linux" },
+			{ name: t("projects.catSistemas1"), icon: "fa-solid fa-gears" },
+			{ name: t("projects.catSistemas2"), icon: "fa-solid fa-headset" },
+			{ name: t("projects.catSistemas3"), icon: "fa-solid fa-database" },
+			{ name: "Microsoft Office", icon: "fa-brands fa-microsoft" },
 		],
 	},
 	{
 		icon: "fa-solid fa-code",
 		title: t("projects.catBackendTitulo"),
-		items: ["Java", "JavaFX", "Bash", "Firebase"],
+		items: [
+			{ name: "Java", icon: "fa-brands fa-java" },
+			{ name: "JavaFX", icon: "fa-solid fa-code" },
+			{ name: "Bash", icon: "fa-solid fa-terminal" },
+			{ name: "Firebase", icon: "fa-solid fa-fire" },
+		],
 	},
 	{
 		icon: "fa-solid fa-laptop-code",
 		title: t("projects.catFrontendTitulo"),
 		items: [
-			"HTML",
-			"CSS",
-			"JavaScript",
-			"jQuery",
-			"Bootstrap",
-			"SASS",
-			"Vue.js",
+			{ name: "HTML", icon: "fa-brands fa-html5" },
+			{ name: "CSS", icon: "fa-brands fa-css3-alt" },
+			{ name: "JavaScript", icon: "fa-brands fa-js" },
+			{ name: "jQuery", icon: "fa-solid fa-code" },
+			{ name: "Bootstrap", icon: "fa-brands fa-bootstrap" },
+			{ name: "SASS", icon: "fa-brands fa-sass" },
+			{ name: "Vue.js", icon: "fa-brands fa-vuejs" },
 		],
 	},
 	{
 		icon: "fa-solid fa-database",
 		title: t("projects.catDatosTitulo"),
-		items: ["MongoDB", "Docker", "Git", "GitHub"],
+		items: [
+			{ name: "MongoDB", icon: "fa-solid fa-leaf" },
+			{ name: "Docker", icon: "fa-brands fa-docker" },
+			{ name: "Git", icon: "fa-brands fa-git-alt" },
+			{ name: "GitHub", icon: "fa-brands fa-github" },
+		],
 	},
 ];
 ---
@@ -293,7 +303,10 @@ const skillGroups = [
 								</summary>
 								<div class="skills">
 									{group.items.map((item) => (
-										<span class="skill-pill">{item}</span>
+										<span class="skill-pill">
+											<i class={item.icon} aria-hidden="true" />
+											{item.name}
+										</span>
 									))}
 								</div>
 							</details>

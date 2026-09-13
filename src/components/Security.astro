@@ -113,7 +113,7 @@ const platforms = [
 ];
 ---
 
-<section class="section-pad section-alt seguridad-section" id="seguridad">
+<section class="section-pad section-alt" id="seguridad">
 	<div class="seguridad-seccion section-container">
 		<div class="seguridad-titulos section-head reveal">
 			<span class="section-head-index" aria-hidden="true">02</span>
@@ -271,30 +271,6 @@ const platforms = [
 </section>
 
 <style>
-	.seguridad-section {
-		position: relative;
-		overflow: hidden;
-	}
-
-	.seguridad-section::before {
-		content: "";
-		position: absolute;
-		inset: 0;
-		background-image: linear-gradient(
-				rgba(26, 188, 156, 0.07) 1px,
-				transparent 1px
-			),
-			linear-gradient(90deg, rgba(26, 188, 156, 0.07) 1px, transparent 1px);
-		background-size: 44px 44px;
-		mask-image: radial-gradient(circle at 50% 0%, black, transparent 70%);
-		-webkit-mask-image: radial-gradient(
-			circle at 50% 0%,
-			black,
-			transparent 70%
-		);
-		pointer-events: none;
-	}
-
 	.seguridad-seccion {
 		position: relative;
 		z-index: 1;
