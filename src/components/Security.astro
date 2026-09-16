@@ -51,6 +51,15 @@ const arsenalGroups = [
 
 const writeups = [
 	{
+		href: "/writeups/metasploitable3.pdf",
+		sourceIcon: "fa-solid fa-file-pdf",
+		sourceLabel: t("security.writeup6Plataforma"),
+		titulo: t("security.writeup6Titulo"),
+		desc: t("security.writeup6Desc"),
+		image: "/images/writeups/metasploitable3.png",
+		tags: ["Nmap", "OpenVAS", "Metasploit", "Drupal", "Hydra"],
+	},
+	{
 		href: "https://github.com/devSammyO/writeups/tree/main/thehackerslabs/pa-que-aiga-lujo",
 		sourceIcon: "fa-brands fa-github",
 		sourceLabel: t("security.writeup1Plataforma"),
@@ -58,6 +67,15 @@ const writeups = [
 		desc: t("security.writeup1Desc"),
 		image: "/images/writeups/pa-que-aiga-lujo.png",
 		tags: ["Nmap", "Hydra", "Metasploit", "Ligolo-ng"],
+	},
+	{
+		href: "/writeups/hacking-maquina-blue.pdf",
+		sourceIcon: "fa-solid fa-file-pdf",
+		sourceLabel: t("security.writeup7Plataforma"),
+		titulo: t("security.writeup7Titulo"),
+		desc: t("security.writeup7Desc"),
+		image: "/images/writeups/hacking-maquina-blue.png",
+		tags: ["Metasploit", "EternalBlue", "Meterpreter", "John the Ripper"],
 	},
 	{
 		href: "/writeups/vpn-wireguard-mikrotik.pdf",
@@ -94,6 +112,15 @@ const writeups = [
 		desc: t("security.writeup5Desc"),
 		image: "/images/writeups/idor-path-traversal.png",
 		tags: ["IDOR", "Path Traversal", "Burp Suite"],
+	},
+	{
+		href: "/writeups/hardening-ubuntu-ssh.pdf",
+		sourceIcon: "fa-solid fa-file-pdf",
+		sourceLabel: t("security.writeup8Plataforma"),
+		titulo: t("security.writeup8Titulo"),
+		desc: t("security.writeup8Desc"),
+		image: "/images/writeups/hardening-ubuntu-ssh.png",
+		tags: ["OpenSSH", "Lynis", "lnav", "Ubuntu Server"],
 	},
 ];
 
@@ -203,52 +230,66 @@ const platforms = [
 				<span class="term-label-path">~/writeups</span>
 				<span class="term-label-cursor" aria-hidden="true"></span>
 			</h5>
-			<div class="writeups-grid">
-				{
-					writeups.map((w) => (
-						<a
-							class="writeup-card"
-							href={w.href}
-							target="_blank"
-							rel="noopener noreferrer"
-							data-spotlight
-						>
-							<span class="btn-spotlight" aria-hidden="true" />
-							<div class="writeup-media">
-								<img
-									class="writeup-imagen"
-									src={w.image}
-									alt={w.titulo}
-									loading="lazy"
-									onerror="this.remove()"
-								/>
-								<span class="writeup-tags-float">
-									{w.tags.map((tag) => (
-										<span class="tag-float">{tag}</span>
-									))}
-								</span>
-								<span class="writeup-scrim" aria-hidden="true" />
-								<div class="writeup-overlay-info">
-									<span class="writeup-fuente">
-										<i class={w.sourceIcon} />
-										{w.sourceLabel}
-									</span>
-									<h3>{w.titulo}</h3>
-								</div>
-							</div>
-							<div class="writeup-footer">
-								<p>{w.desc}</p>
-								<span class="writeup-link-inline">
-									{t("security.leerWriteup")}
-									<i
-										class="fa-solid fa-arrow-up-right-from-square"
-										aria-hidden="true"
+			<div class="writeups-carousel" data-writeups-carousel>
+				<div
+					class="writeups-track"
+					data-writeups-track
+					tabindex="0"
+					aria-label={t("security.writeupsCarouselLabel")}
+				>
+					{
+						writeups.map((w) => (
+							<a
+								class="writeup-card"
+								href={w.href}
+								target="_blank"
+								rel="noopener noreferrer"
+								data-spotlight
+							>
+								<span class="btn-spotlight" aria-hidden="true" />
+								<div class="writeup-media">
+									<img
+										class="writeup-imagen"
+										src={w.image}
+										alt={w.titulo}
+										loading="lazy"
+										onerror="this.remove()"
 									/>
-								</span>
-							</div>
-						</a>
-					))
-				}
+									<span class="writeup-tags-float">
+										{w.tags.map((tag) => (
+											<span class="tag-float">{tag}</span>
+										))}
+									</span>
+									<span class="writeup-scrim" aria-hidden="true" />
+									<div class="writeup-overlay-info">
+										<span class="writeup-fuente">
+											<i class={w.sourceIcon} />
+											{w.sourceLabel}
+										</span>
+										<h3>{w.titulo}</h3>
+									</div>
+								</div>
+								<div class="writeup-footer">
+									<p>{w.desc}</p>
+									<span class="writeup-link-inline">
+										{t("security.leerWriteup")}
+										<i
+											class="fa-solid fa-arrow-up-right-from-square"
+											aria-hidden="true"
+										/>
+									</span>
+								</div>
+							</a>
+						))
+					}
+				</div>
+			</div>
+			<div class="writeups-scrollbar" data-writeups-scrollbar>
+				<span
+					class="writeups-scrollbar-thumb"
+					data-writeups-thumb
+					aria-hidden="true"
+				/>
 			</div>
 			<a
 				class="mas-writeups btn btn-ghost btn-sm"
@@ -406,15 +447,120 @@ const platforms = [
 	}
 
 
-	.writeups-grid {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 24px;
+	.writeups-carousel {
+		position: relative;
 		width: 100%;
+	}
+
+	.writeups-carousel::before,
+	.writeups-carousel::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		width: 56px;
+		z-index: 2;
+		pointer-events: none;
+		opacity: 1;
+		transition: opacity 0.3s ease;
+	}
+
+	.writeups-carousel::before {
+		left: 0;
+		background: linear-gradient(to right, var(--bg-alt), transparent);
+	}
+
+	.writeups-carousel::after {
+		right: 0;
+		background: linear-gradient(to left, var(--bg-alt), transparent);
+	}
+
+	.writeups-carousel.is-start::before {
+		opacity: 0;
+	}
+
+	.writeups-carousel.is-end::after {
+		opacity: 0;
+	}
+
+	.writeups-track {
+		display: flex;
+		gap: 20px;
+		width: 100%;
+		overflow-x: auto;
+		scroll-snap-type: x proximity;
+		scroll-padding-left: 2px;
+		padding: 2px 2px 10px;
+		margin: -2px -2px -10px;
+		cursor: grab;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: none;
+		outline: none;
+	}
+
+	.writeups-track::-webkit-scrollbar {
+		display: none;
+	}
+
+	.writeups-track.is-animating {
+		scroll-snap-type: none;
+	}
+
+	.writeups-track.is-dragging {
+		cursor: grabbing;
+	}
+
+	.writeups-track:focus-visible {
+		box-shadow: inset 0 0 0 2px var(--accent);
+		border-radius: 16px;
+	}
+
+	.writeups-scrollbar {
+		position: relative;
+		width: 100%;
+		max-width: 320px;
+		height: 16px;
+		display: flex;
+		align-items: center;
+		cursor: pointer;
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 0.3s ease;
+	}
+
+	.writeups-carousel.is-scrollable + .writeups-scrollbar {
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	.writeups-scrollbar::before {
+		content: "";
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 50%;
+		height: 2px;
+		background: var(--border);
+		border-radius: 999px;
+		transform: translateY(-50%);
+	}
+
+	.writeups-scrollbar-thumb {
+		position: absolute;
+		left: 0;
+		top: 50%;
+		height: 3px;
+		margin-top: -1.5px;
+		border-radius: 999px;
+		background: var(--accent);
+		box-shadow: 0px 0px 10px var(--accent-soft);
+		will-change: left, width;
 	}
 
 	.writeup-card {
 		position: relative;
+		flex: 0 0 80%;
+		max-width: 340px;
 		display: flex;
 		flex-direction: column;
 		text-align: left;
@@ -423,6 +569,8 @@ const platforms = [
 		overflow: hidden;
 		border: 1px solid var(--border);
 		box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.35);
+		scroll-snap-align: start;
+		cursor: inherit;
 		transition: transform 0.3s ease, box-shadow 0.3s ease,
 			border-color 0.3s ease;
 	}
@@ -603,15 +751,15 @@ const platforms = [
 		}
 	}
 
-	@media screen and (min-width: 988px) {
-		.writeups-grid {
-			grid-template-columns: repeat(2, 1fr);
+	@media screen and (min-width: 560px) {
+		.writeup-card {
+			flex-basis: 300px;
 		}
 	}
 
 	@media screen and (min-width: 1280px) {
-		.writeups-grid {
-			grid-template-columns: repeat(3, 1fr);
+		.writeup-card {
+			flex-basis: 320px;
 		}
 	}
 </style>
